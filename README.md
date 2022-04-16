@@ -1,6 +1,8 @@
-##AKTUALIZACJA SYSTEMU
+## AKTUALIZACJA SYSTEMU
+```
 sudo apt update
 sudo apt upgrade
+```
 
 
 ##INSTALACJA NGINX

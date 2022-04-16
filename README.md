@@ -1,64 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+AKTUALIZACJA SYSTEMU
+sudo apt update
+sudo apt upgrade
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+INSTALACJA NGINX
+sudo apt install nginx
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+INSTALACJA PHP Z REPOZYTORIUM PPA:ONDREJ (VER 8.1)
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt install php8.1-common php8.1-cli
+sudo apt install php8.1-{bz2,curl,intl,mysql,mbstring,readline,xml}
+sudo apt install php8.1-fpm
+sudo apt install zip unzip php-zip
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+INSTALACJA MYSQL (VER 8)
+cd /tmp
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.19-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.19-1_all.deb
+sudo apt update
+sudo apt install mysql-server
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+TYLKO NA SRODOWISKU PROD DODANIE SWAPA JELI ZA MALO RAM!!!!
+dd if=/dev/zero of=/swapfile bs=1M count=1024
+mkswap /swapfile
+swapon /swapfile
+ponownie
+sudo apt install mysql-server
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+DODANIE USERA DO BAZY (DODAJ SWOJEGO I ZMIEN WARTOSC W .ENV.EXAMPLE)
+logowanie do mysql shell
+mysql -u root
+konsola mysql
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+CREATE USER 'marek'@'localhost' IDENTIFIED BY 'haslo';
+GRANT ALL PRIVILEGES ON *.* TO 'marek'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+exit
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+LOGOWANIE NA NOWYM USER
+mysql -u marek -p
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+TWORZENIE BAZY 
+CREATE DATABASE bizman;
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+INSTALACJA COMPOSER (PACKAGE MANAGER PHP)
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+composer --version
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+KLONOWANIE REPO
+cd /var/www
+git clone https://github.com/MarekBawolski/bizman.git
+logowanie do githuba (kazdy ma swojego usera)
+
+
+INSTALACJA NVM NODE I NPM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+source ~/.bashrc
+nvm list-remote
+nvm install v16.14.2
+
+
+INSTALACJA APLIKACJI (PHP DEPENDENCIES)
+composer install
+
+
+TWORZENIE PLIKU KONFIGURACJI .ENV
+cp .env.example .env
+
+
+MIGRACJA TABEL W BAZIE DANYCH
+php artisan migrate
+
+
+POBRANIE JS DEPENDENCIES PRZEZ NPM
+npm install
+npm run dev
+
+
+DODANIE PLIKU KONFIGURACJI NGINX
+cp nginx.conf.sample /etc/nginx/sites-available/bizman
+
+
+SYMLINK NGINX
+cd /etc/nginx/sites-enabled
+sudo ln -s ../sites-available/bizman .
+ls -l
+
+
+DODANIE WPISU DO PLIKU ETC/HOSTS (NP POD LOCALHOST)
+nano /etc/hosts
+127.0.0.1 bizman.pl
+
+
+RESTART NGINX
+systemctl restart nginx
+
+
+KONFIGURACJA DOSTEPOW DLA GRUPY NGINX
+cd /var/www/bizman
+sudo chown -R $USER:www-data storage
+sudo chown -R $USER:www-data bootstrap/cache
+
+
+ZMIANA UPRAWNIEN DLA KATALOGOW
+chmod -R 775 storage
+chmod -R 775 bootstrap/cache

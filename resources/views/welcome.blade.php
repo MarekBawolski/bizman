@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         
     </head>
-    <body class="bg-white">
+    <body class="bg-gray-100">
         <nav class="px-20 p-5 bg-gray-100 shadow md:flex md:items-center md:justify-between">
 
             <div>
@@ -73,5 +73,30 @@
                     @endauth
             @endif 
         </nav>
+
+        <section id="home" class="md:px-40 relative">
+            <div class="container flex flex-col-reverse lg:flex-row items-center gap-12 mt-14 lg:mt-28">
+                <div class="flex flex-1 flex-col items-center lg:items-start">
+                    <h2 class="text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-6 font-extrabold">
+                        Erat dolores sea dolores lorem nonumy no invidunt rebum diam.
+                    </h2>
+                    <p class="text-lg text-center lg:text-left mb-6">
+                        Kasd at kasd et ipsum stet aliquyam no est. Kasd amet tempor consetetur sit elitr et consetetur at. Aliquyam nonumy ut lorem sed eirmod eirmod, labore sit elitr dolore duo et magna dolores eirmod. Sit est lorem ea duo labore. Sanctus sit sed erat stet et diam diam, consetetur diam.
+                    </p>
+                    <div class="flex justify-center flex-wrap gap-6">
+                            <button class="bg-blue-600 text-white duration-500 px-4 py-2 mx-4 hover:bg-blue-500 rounded text-lg">
+                                Napisz do nas
+                            </button>
+                            <button class="bg-white duration-500 px-4 py-2 mx-4 hover:bg-blue-500 hover:text-white rounded text-lg border-2 border-gray-300">
+                                Zamów demo
+                            </button>
+                    </div>
+                </div>
+                <div class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10">
+                    <img src="https://i.ibb.co/MMMB24P/Image-Container.png" alt="Image-Container" class="w-5/6 h-5/6 sm:h-3/4 sm:h-3/4 md:w-full md:h-full">
+                </div>
+            </div>
+        </section>
+
     </body>
 </html>

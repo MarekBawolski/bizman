@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExperimentController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('experiment', [ExperimentController::class, 'index'])
-                ->name('experiment');
+Route::get('/clients', [ClientController::class, 'index'])->middleware(['auth'])->name('clients');
 
-require __DIR__.'/auth.php';
+// Route::get('/clients/{client_id}', function ($id) {return view('client', []);})->middleware(['auth'])->name('clients')->where('client_id', '[0-9]+');
+
+Route::get('experiment', [ExperimentController::class, 'index'])
+    ->name('experiment');
+
+require __DIR__ . '/auth.php';

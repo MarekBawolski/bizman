@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
-            $table->string('email')->unique();
-            $table->string('address');
-            $table->string('city');
-            $table->string('company');
-            $table->string('tax_id')->unique();
-            $table->string('company_id')->unique();
-            $table->string('website');
-            $table->string('notes');
+            $table->string('email')->unique()->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('company')->nullable();
+            $table->string('tax_id')->unique()->nullable();
+            $table->string('company_id')->unique()->nullable();
+            $table->string('website')->nullable();
+            $table->string('notes')->nullable();
         });
     }
 

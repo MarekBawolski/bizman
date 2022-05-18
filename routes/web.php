@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExperimentController;
-use Illuminate\Support\Facades\Route;
 use App\Models\Client;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +27,9 @@ Route::get('/dashboard', function () {
 Route::get('/clients', [ClientController::class, 'index'])->middleware(['auth'])->name('clients');
 
 Route::get('/clients/{client}', function ($id) {
-return view('client', []);})->middleware(['auth'])->name('clients')->where('client', '[0-9]+');
+    @dump($id);
+    return view('client', []);
+})->middleware(['auth'])->name('clients')->where('client', '[0-9]+');
 
 Route::get('experiment', [ExperimentController::class, 'index'])
     ->name('experiment');

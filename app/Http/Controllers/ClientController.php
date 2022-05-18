@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
     public function index()
     {
-
-        return view('clients');
+        return view('clients', [
+            'clients' => Client::paginate(15)
+        ]);
     }
 }

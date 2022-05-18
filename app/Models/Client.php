@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Database\Factories\ClientFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\ClientFactory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Client extends Model
 {
@@ -14,4 +15,9 @@ class Client extends Model
     {
         return ClientFactory::new();
     }
+    // public static function find($id){
+    //     if(){
+    //         throw new ModelNotFoundException("Client not found");
+    //     }
+    // }
 }

@@ -6,6 +6,13 @@
   </x-slot>
 
   @isset($clients)
-    @dump($clients)
+    @foreach ($clients as $client)
+      <a href="{{ '/clients/' . $client->id . '/view' }}">{{ $client->first_name }} {{ $client->last_name }}</a><br>
+    @endforeach
   @endisset ($clients)
+
+
+  <div class="flex justify-center">
+    {!! $clients->links() !!}
+  </div>
 </x-app-layout>

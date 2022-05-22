@@ -10,6 +10,8 @@ class QuoteState extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     protected static function newFactory()
     {
         return QuoteStateFactory::new();

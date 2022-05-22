@@ -11,13 +11,15 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     protected static function newFactory()
     {
         return ClientFactory::new();
     }
-    // public static function find($id){
-    //     if(){
-    //         throw new ModelNotFoundException("Client not found");
-    //     }
-    // }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
+    }
 }

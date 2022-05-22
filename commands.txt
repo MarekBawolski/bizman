@@ -1,0 +1,12 @@
+https://laravel.com/docs/9.x/sail
+
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+sail up
+sail stop
+sail up -d
+
+# Running Artisan commands locally...
+php artisan queue:work
+ 
+# Running Artisan commands within Laravel Sail...
+sail artisan queue:work

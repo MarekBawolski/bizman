@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Client;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +29,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('view-client', function (User $user, Client $client) {
+            return $user->id === $client->user_id
+                ? Response::allow()
+                : Response::deny('You dont have access to this client');
+        });
+        Gate::define('update-client', function (User $user, Client $client) {;
+            return $user->id === $client->user_id
+                ? Response::allow()
+                : Response::deny('You dont have access to this client');
+        });
     }
 }

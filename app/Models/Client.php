@@ -12,7 +12,20 @@ class Client extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'phone_number',
+        'email',
+        'address',
+        'city',
+        'company',
+        'tax_id',
+        'company_id',
+        'website',
+        'notes',
+    ];
     protected static function newFactory()
     {
         return ClientFactory::new();

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('phone_number');
+            $table->string('phone_number')->nullable();;
             $table->string('email')->unique()->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('tax_id')->unique()->nullable();
             $table->string('company_id')->unique()->nullable();
             $table->string('website')->nullable();
-            $table->string('notes')->nullable();
+            $table->longText('notes')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

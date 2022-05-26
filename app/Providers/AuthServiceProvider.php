@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
                 ? Response::allow()
                 : Response::deny('You dont have access to this client');
         });
-        Gate::define('update-client', function (User $user, Client $client) {;
+        Gate::define('edit-client', function (User $user, Client $client) {;
             return $user->id === $client->user_id
                 ? Response::allow()
                 : Response::deny('You dont have access to this client');

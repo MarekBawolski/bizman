@@ -33,9 +33,15 @@ Route::get('/dashboard', function () {
 /*
     CLIENTS
 */
-Route::get('/clients', [ClientController::class, 'getClients'])->middleware(['auth'])->name('clients');
+Route::get('/clients', [ClientController::class, 'index'])->middleware(['auth'])->name('clients');
+Route::post('/clients', [ClientController::class, 'store'])->middleware(['auth']);
+Route::get('/clients/create', [ClientController::class, 'create'])->middleware(['auth']);
+Route::get('/clients/{client}', [ClientController::class, 'show'])->middleware(['can:view-client,client'])->name('clients')->where('client', '[0-9]+');
+Route::patch('/clients/{client}', [ClientController::class, 'update'])->middleware(['can:edit-client,client'])->name('clients')->where('client', '[0-9]+');
+Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->middleware(['can:edit-client,client'])->name('clients')->where('client', '[0-9]+');
+Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->middleware(['can:edit-client,client'])->name('clients')->where('client', '[0-9]+');
 
-Route::get('/clients/{client}/view', [ClientController::class, 'viewClient'])->middleware(['can:view-client,client'])->name('clients')->where('client', '[0-9]+');
+
 
 /*
     QUOTES

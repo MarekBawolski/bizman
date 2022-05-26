@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('priced_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('job_type_id');
             $table->longText('title');
             $table->longText('content')->nullable();

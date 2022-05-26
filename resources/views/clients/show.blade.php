@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
 
-  <div class="container mx-auto">
+  <div class="container grid grid-cols-2 gap-8 mx-auto">
 
     <div class="flex flex-col gap-2">
       <x-label for="first_name" :value="__('Imię')" />
@@ -65,25 +65,26 @@
       @enderror
     </div>
 
+    <div class="quotes">
+      <h2 class="my-4 text-xl font-bold">Wyceny:</h2>
 
-    @isset($quotes)
-      <h2>Quotes:</h2>
-      <ul>
-        @foreach ($quotes as $quote)
-          <li>
-            Quote name: {{ $quote->name }}
-            @if ($quote->quote_elements)
-              <ul>
-                @foreach (json_decode($quote->quote_elements) as $quote_element_id)
-                  <li>
-                    {{ $quote_element_id }}
-                  </li>
-                @endforeach
-              </ul>
-            @endif
-          </li>
-        @endforeach
-      </ul>
-    @endisset ($client)
+      @if (count($quotes) > 0)
+        <ul class="flex flex-col gap-4">
+          @foreach ($quotes as $quote)
+            <li class="">
+              <a class="block px-8 py-4 bg-white rounded-md hover:bg-green-100" href="">
+                {{ $quote->name }}
+
+              </a>
+            </li>
+          @endforeach
+        </ul>
+      @else
+        <div class="empty">
+          {{ __('Brak wycen') }}
+        </div>
+      @endif ($quotes)
+    </div>
+
   </div>
 </x-app-layout>

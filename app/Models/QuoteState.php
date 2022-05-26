@@ -16,4 +16,9 @@ class QuoteState extends Model
     {
         return QuoteStateFactory::new();
     }
+
+    public function pricedItems()
+    {
+        return $this->hasMany(PricedItem::class);
+    }
 }

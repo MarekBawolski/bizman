@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('job_types', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('settings_id')->references('id')->on('user_settings');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('settings_id')->references('id')->on('user_settings')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('type');
             $table->string('abbreviation');
             $table->timestamp('created_at')->useCurrent();

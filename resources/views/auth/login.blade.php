@@ -1,9 +1,12 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
+            <div class="flex flex-col justify-center items-center">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
+            <span class="text-3xl font-extrabold mt-4">Zaloguj się</span>
+            </div>
         </x-slot>
 
         <!-- Session Status -->
@@ -24,7 +27,7 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" :value="__('Hasło')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -32,25 +35,30 @@
                                 required autocomplete="current-password" />
             </div>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
+            <!-- Remember Me, Forgot Password-->
+            <div class="flex justify-between mt-4">
                 <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" name="remember">
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Zapamiętaj mnie') }}</span>
                 </label>
+
+                <div class="flex items-center">
+                    @if (Route::has('password.request'))
+                        <a class="text-sm text-blue-600 hover:text-blue-900" href="{{ route('password.request') }}">
+                            {{ __('Zapomniałeś hasła?') }}
+                        </a>
+                    @endif
+                </div>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
+            <x-button class="flex justify-center mt-8">
+                {{ __('Logowanie') }}
+            </x-button>
         </form>
+
+        <div class="flex justify-center mt-4">
+            Nie masz konta? <a href="{{ route('register') }}" class="ml-2 text-blue-600">Zarejestruj się</a>
+        </div>
+        
     </x-auth-card>
 </x-guest-layout>

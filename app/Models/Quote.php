@@ -12,7 +12,15 @@ class Quote extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
+    protected $fillable = [
+        'client_id',
+        'user_id',
+        'status_id',
+        'name',
+        'quote_elements',
+        'calculate',
+        'notes'
+    ];
     protected static function newFactory()
     {
         return QuoteFactory::new();
@@ -22,7 +30,4 @@ class Quote extends Model
     {
         return $this->belongsTo(Client::class);
     }
-    // public function state(){
-    //     return $this->
-    // }
 }

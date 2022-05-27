@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExperimentController;
+use App\Http\Controllers\QuoteController;
 use App\Models\Client;
 use App\Models\Quote;
 use App\Models\User;
@@ -33,14 +34,25 @@ Route::get('/dashboard', function () {
 /*
     CLIENTS
 */
-Route::get('/clients', [ClientController::class, 'getClients'])->middleware(['auth'])->name('clients');
-
-Route::get('/clients/{client}/view', [ClientController::class, 'viewClient'])->middleware(['can:view-client,client'])->name('clients')->where('client', '[0-9]+');
+Route::get('/clients', [ClientController::class, 'index'])->middleware(['auth'])->name('clients');
+Route::post('/clients', [ClientController::class, 'store'])->middleware(['auth']);
+Route::get('/clients/create', [ClientController::class, 'create'])->middleware(['auth']);
+Route::get('/clients/{client}', [ClientController::class, 'show'])->middleware(['can:view-client,client'])->name('clients')->where('client', '[0-9]+');
+Route::patch('/clients/{client}', [ClientController::class, 'update'])->middleware(['can:edit-client,client'])->name('clients')->where('client', '[0-9]+');
+Route::get('/clients/{client}/edit', [ClientController::class, 'edit'])->middleware(['can:edit-client,client'])->name('clients')->where('client', '[0-9]+');
+Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->middleware(['can:edit-client,client'])->name('clients')->where('client', '[0-9]+');
 
 /*
     QUOTES
 */
-//TODO
+
+Route::get('/quotes', [QuoteController::class, 'index'])->middleware(['auth'])->name('quotes');
+Route::post('/quotes', [QuoteController::class, 'store'])->middleware(['auth']);
+Route::get('/quotes/create', [QuoteController::class, 'create'])->middleware(['auth']);
+Route::get('/quotes/{quote}', [QuoteController::class, 'show'])->middleware(['can:view-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
+Route::patch('/quotes/{quote}', [QuoteController::class, 'update'])->middleware(['can:edit-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
+Route::get('/quotes/{quote}/edit', [QuoteController::class, 'edit'])->middleware(['can:edit-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
+Route::delete('/quotes/{quote}', [QuoteController::class, 'destroy'])->middleware(['can:edit-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
 /*
     PRICED ITEMS
 */

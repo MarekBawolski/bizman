@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Client;
+use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -34,10 +35,22 @@ class AuthServiceProvider extends ServiceProvider
                 ? Response::allow()
                 : Response::deny('You dont have access to this client');
         });
-        Gate::define('update-client', function (User $user, Client $client) {;
+        Gate::define('edit-client', function (User $user, Client $client) {;
             return $user->id === $client->user_id
                 ? Response::allow()
                 : Response::deny('You dont have access to this client');
+        });
+
+        Gate::define('view-quote', function (User $user, Quote $quote) {;
+            return $user->id === $quote->user_id
+                ? Response::allow()
+                : Response::deny('You dont have access to this quote');
+        });
+
+        Gate::define('edit-quote', function (User $user,  Quote $quote) {;
+            return $user->id === $quote->user_id
+                ? Response::allow()
+                : Response::deny('You dont have access to this quote');
         });
     }
 }

@@ -98,17 +98,25 @@
         @enderror
         </div>
       </div>
-      <div class="sm:w-1/2 bg-white p-4 rounded-xl mt-4 sm:mt-0">
-        @isset($quotes)
-        <h2>Quotes:</h2>
-        <ul>
-          @foreach ($quotes as $quote)
-            <li>
-              Quote name: {{ $quote->name }}
-            </li>
-          @endforeach
-        </ul>
-        @endisset ($client)
+      <div class="sm:w-1/2 bg-white p-4 rounded-xl mt-4 sm:mt-0 h-96 overflow-auto"">
+        <h2 class="my-4 text-xl font-bold">Wyceny:</h2>
+
+        @if (count($quotes) > 0)
+          <ul class="flex flex-col gap-4">
+            @foreach ($quotes as $quote)
+              <li class="">
+                <a class="block px-8 py-4 bg-white rounded-md hover:bg-green-100" href="">
+                  {{ $quote->name }}
+
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        @else
+          <div class="empty">
+            {{ __('Brak wycen') }}
+          </div>
+        @endif ($quotes)
       </div>    
     </div>
   </div>

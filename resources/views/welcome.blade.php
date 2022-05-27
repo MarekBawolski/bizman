@@ -27,20 +27,20 @@
     </head>
     <body class="bg-white">
         <header class="shadow bg-main-gray fixed z-10 w-full">
-            <nav x-data="{ isOpen: false }" @click.away="isOpen = false" class="container mx-auto lg:flex items-center justify-between py-3 px-6">            
+            <nav x-data="{ isOpen: false }" @click.away="isOpen = false" class="container mx-auto lg:flex items-center justify-between py-3 px-6">
                 <a href="/" class="float-left">
                     <x-landing-page-logo />
                 </a>
 
                 <div class="flex lg:hidden justify-end items-center">
-                    <button 
-                        type="button" 
-                        class="text-blue-600 p-2" 
+                    <button
+                        type="button"
+                        class="text-blue-600 p-2"
                         aria-label="toggle menu"
                         @click="isOpen = !isOpen">
                         <svg viewBox="0 0 24 24" class="h-10 w-10 fill-current">
                             <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-                        </svg>                    
+                        </svg>
                     </button>
                 </div>
 
@@ -58,19 +58,19 @@
 
                 <div :class="isOpen ? 'show' : 'hidden'" class="lg:flex text-lg">
                     @if (Route::has('login'))
-                            @auth                            
-                                <a href="{{ url('/dashboard') }}">
+                            @auth
+                                <a href="{{ url('/clients') }}">
                                     <button class="bg-blue-600 text-white duration-500 px-4 py-2 m-3 hover:bg-blue-500 rounded">
                                         Dashboard
-                                    </button>                           
+                                    </button>
                                 </a>
-                            @else                          
+                            @else
                                 <a href="{{ route('login') }}">
                                     <button class="bg-main-gray duration-500 px-4 py-2 m-3 hover:bg-blue-500 hover:text-white rounded">
                                         Logowanie
                                     </button>
                                 </a>
-                                @if (Route::has('register'))                               
+                                @if (Route::has('register'))
                                     <a href="{{ route('register') }}">
                                         <button class="bg-blue-600 text-white duration-500 px-4 py-2 m-3 hover:bg-blue-500 rounded">
                                             Rejestracja
@@ -79,7 +79,7 @@
                                 @endif
                             @endauth
                     @endif
-                </div>                
+                </div>
             </nav>
         </header>
 
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center flex-1 mb-2 sm:mb-8 lg:mb-0">
-                    <img src="{{ asset('images/landing-page-image.png') }}" alt="landing-page-image" class="w-full h-full"/>                   
+                    <img src="{{ asset('images/landing-page-image.png') }}" alt="landing-page-image" class="w-full h-full"/>
                 </div>
             </div>
         </section>
@@ -143,7 +143,7 @@
                         <img src="{{ asset('images/tools-image.png') }}" alt="tools-image" class="w-3/4 h-3/4 xl:w-full xl:h-full my-10 lg:my-0"/>
                     </div>
 
-                    <div class="flex flex-col justify-center gap-10">                       
+                    <div class="flex flex-col justify-center gap-10">
                         <div class="flex items-center flex-col">
                             <button class="bg-blue-600 p-5 py-6 rounded">
                                 <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -18,8 +18,7 @@
           <div class="p-6 border-b border-gray-200">
             <a href="{{ url('/clients/create') }}" class="my-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded">
               {{ __('Dodaj nowego klienta') }}
-            
-                          </a>
+            </a>
             @isset($clients)
             <div class="flex flex-col">
               <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

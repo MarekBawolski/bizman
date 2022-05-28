@@ -19,20 +19,13 @@
 </head>
 
 <body class="font-sans antialiased">
-  <div class="min-h-screen bg-gray-100">
-    @include('layouts.navigation')
-
-    <!-- Page Heading -->
-    <header class="bg-white shadow">
-      <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        {{ $header }}
-      </div>
-    </header>
-
-    <!-- Page Content -->
-    <main>
-      {{ $slot }}
-    </main>
+  <div class="h-screen ">
+    <div class="grid grid-cols-[300px_auto] h-full">
+      @include('layouts.navigation')
+      <main>
+        {{ $slot }}
+      </main>
+    </div>
   </div>
 </body>
 

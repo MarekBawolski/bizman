@@ -16,15 +16,15 @@
       <div class="max-w-7xl mx-auto min-w-min sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 border-b border-gray-200">
-            <a href="{{ url('/clients/create') }}" class="my-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded">
+            <a href="{{ url('/clients/create') }}" class="mt-4 xl:mt-0 px-8 py-2 mx-4 text-lg text-white duration-500 bg-blue-600 rounded hover:bg-blue-500">
               {{ __('Dodaj nowego klienta') }}
             </a>
             @isset($clients)
             <div class="flex flex-col">
-              <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="-my-2 overflow-x-auto lg:-mx-8">
                 <div class="py-5 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                   <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg text-center">
-                    <div class="table min-w-min">
+                    <div class="table min-w-min hidden md:block">
                       <div class="table-header-group -50 text-center border-b border-gray-200 bg-gray-300">
                         <div class="table-row">
                           <div scope="col" class="table-cell px-3 py-4 text-xs font-medium text-gray-700 bg-gray-300">
@@ -100,6 +100,112 @@
                         @endforeach
                       </div>
                     </div>
+                    @foreach ($clients as $client)
+                    <div class="md:hidden">
+                      <div class="mt-5 border-b border-gray-300 grid grid-cols-2">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-3 py-4 text-xs font-medium text-gray-700">
+                            ID:
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-3 py-4 text-xs font-medium text-gray-700">
+                            {{ $client->id}}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300 grid grid-cols-2">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            Imię i nazwisko:
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            {{ $client->first_name }} {{ $client->last_name }}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300 grid grid-cols-2">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            Numer telefonu:
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            {{ $client->phone_number }}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300 grid grid-cols-2">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            E-mail:
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            {{ $client->email}}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300 grid grid-cols-2">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            Utworzono:
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            {{ $client->created_at }}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300 grid grid-cols-2">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            Zmieniono:
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            {{ $client->updated_at }}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300 grid grid-cols-2">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            Firma:
+                          </a>
+                        </div>
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id) }}" class="px-5 py-4 text-xs font-medium text-gray-700">
+                            {{ $client->company }}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300">
+                        <div>
+                          <a href="{{ url('/clients/' . $client->id . '/edit') }}" class="px-5 py-4 text-xs font-medium text-yellow-400">
+                            Edytuj
+                          </a>
+                        </div>
+                      </div>
+                      <div class="border-b border-gray-300">
+                        <div>
+                          <form method="POST" action="/clients/{{ $client->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="h-0.5 px-5 text-xs font-medium text-red-400">
+                              Usuń
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    @endforeach
                     <div class="flex justify-center">
                       {!! $clients->links() !!}
                     </div>

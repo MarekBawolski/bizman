@@ -16,7 +16,7 @@
       <div class="max-w-7xl mx-auto min-w-min sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 border-b border-gray-200">
-            <a href="{{ url('/quotes/create') }}" class="my-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded">
+            <a href="{{ url('/quotes/create') }}" class="mt-4 xl:mt-0 px-8 py-2 mx-4 text-lg text-white duration-500 bg-blue-600 rounded hover:bg-blue-500">
               {{ __('Dodaj nową wycenę') }}
             </a>
             @isset($quotes)

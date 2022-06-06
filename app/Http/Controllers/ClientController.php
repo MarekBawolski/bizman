@@ -17,7 +17,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients =  Client::latest('updated_at')->where('user_id', Auth::user()->id)->paginate(15);
+        $clients =  Client::latest('updated_at')
+            ->search(request(['search']))
+            ->where('user_id', Auth::user()->id)
+            ->paginate(15);
+
         return view('clients.index', compact('clients'));
     }
 

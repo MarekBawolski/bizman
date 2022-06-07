@@ -35,4 +35,16 @@ class Client extends Model
     {
         return $this->hasMany(Quote::class);
     }
+
+    public function scopeSearch($query, array $filters)
+    {
+        if ($filters['search'] ?? false)
+        {
+            $query->where('first_name', 'like', '%' . request('search') . '%')
+                  ->orWhere('first_name', 'like', '%' . request('search') . '%')
+                  ->orWhere('last_name', 'like', '%' . request('search') . '%')
+                  ->orWhere('email', 'like', '%' . request('search') . '%')
+                  ->orWhere('city', 'like', '%' . request('search') . '%');
+        }
+    }
 }

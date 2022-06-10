@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExperimentController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\UserSettingController;
 use App\Models\Client;
 use App\Models\Quote;
 use App\Models\User;
@@ -30,7 +31,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
+/*
+    USER
+*/
+Route::get('/user/settings', [UserSettingController::class, 'index'])->middleware(['auth'])->name('settings');
+Route::post('/user/settings', [UserSettingController::class, 'store'])->middleware(['auth']);
 /*
     CLIENTS
 */

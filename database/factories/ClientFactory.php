@@ -26,7 +26,6 @@ class ClientFactory extends Factory
     {
         //https://github.com/fzaninotto/Faker
         $userCount = User::all()->count();
-
         return [
             'user_id' => $this->faker->regexify('[1-' . $userCount . ']{1}'),
             'first_name' => $this->faker->firstName,
@@ -36,8 +35,8 @@ class ClientFactory extends Factory
             'address' => $this->faker->streetAddress,
             'city' => $this->faker->city,
             'company' => $this->faker->company,
-            'tax_id' => $this->faker->regexify('[0-9]{10}'),
-            'company_id' => $this->faker->regexify('[0-9]{9}'),
+            'tax_id' => $this->faker->taxpayerIdentificationNumber(),
+            'company_id' => $this->faker->regon(),
             'website' => $this->faker->domainName,
             'notes' => $this->faker->realText(100)
         ];

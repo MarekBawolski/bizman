@@ -24,7 +24,8 @@ class QuoteStateFactory extends Factory
         return [
             'user_id' => $user->id,
             'settings_id' => $user->id,
-            'state' => $this->faker->word()
+            'state' => $this->faker->word(),
+            'color' => $this->faker->hexcolor()
         ];
     }
 }

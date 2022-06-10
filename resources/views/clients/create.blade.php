@@ -1,17 +1,85 @@
 <x-app-layout>
-  
-  <div class="flex flex-col justify-center min-h-screen p-20">
-    <div class="container mx-auto bg-white p-4 rounded-xl border border-gray-200 w-full">
-      <div class="flex flex-col xl:flex-row justify-center items-center xl:justify-between m-4">
+  @if (\Session::has('success'))
+    <x-toast success="success">
+      {!! \Session::get('success') !!}
+    </x-toast>
+  @endif
+  <form id="client_data" method="POST" action="/clients">
+    <x-containers.outer title="Nowy klient" buttonStyle="primary" buttonType="submit" buttonText="Dodaj">
+      <x-containers.inner title="Dane klienta">
+        @csrf
+        <div class="grid grid-cols-2 gap-4">
+          <x-inputs.text name="first_name" :value="old('first_name')" label="Imię">
+            @error('first_name')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.text name="last_name" :value="old('last_name')" label="Nazwisko">
+            @error('last_name')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.tel name="phone_number" :value="old('phone_number')" label="Numer telefonu">
+            @error('phone_number')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.tel>
+          <x-inputs.email name="email" :value="old('email')" label="Adres email">
+            @error('email')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.email>
+          <x-inputs.text name="address" :value="old('address')" label="Adres">
+            @error('address')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.text name="city" :value="old('city')" label="Miasto">
+            @error('city')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.text name="company" :value="old('company')" label="Firma">
+            @error('company')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.text name="tax_id" :value="old('tax_id')" label="Regon">
+            @error('tax_id')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.text name="company_id" :value="old('company_id')" label="NIP">
+            @error('company_id')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.text name="website" :value="old('website')" label="Strona">
+            @error('website')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.text>
+          <x-inputs.textarea name="notes" :value="old('notes')" class="col-span-2" label="Notatki">
+            @error('notes')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-inputs.textarea>
+        </div>
+      </x-containers.inner>
+    </x-containers.outer>
+  </form>
+  {{-- <div class="flex flex-col justify-center min-h-screen p-20">
+    <div class="container w-full p-4 mx-auto bg-white border border-gray-200 rounded-xl">
+      <div class="flex flex-col items-center justify-center m-4 xl:flex-row xl:justify-between">
         <div>
           <h1 class="text-3xl font-extrabold">Nowy klient</h1>
         </div>
         <div>
-          <button form="new_client_data" type="submit" class="mt-4 xl:mt-0 px-8 py-2 mx-4 text-lg text-white duration-500 bg-blue-600 rounded hover:bg-blue-500">Utwórz</button>
+          <button form="new_client_data" type="submit" class="px-8 py-2 mx-4 mt-4 text-lg text-white duration-500 bg-blue-600 rounded xl:mt-0 hover:bg-blue-500">Utwórz</button>
         </div>
       </div>
-      <div class="bg-gray-100 mt-6 p-4 rounded-xl gap-10">
-          <form id="new_client_data" method="POST" action="/clients" class="grow grid lg:grid-cols-2 gap-6">
+      <div class="gap-10 p-4 mt-6 bg-gray-100 rounded-xl">
+          <form id="new_client_data" method="POST" action="/clients" class="grid gap-6 grow lg:grid-cols-2">
             @csrf
             <div>
             <x-label for="first_name" :value="__('Imię')" />
@@ -93,6 +161,6 @@
           </form>
       </div>
     </div>
-  </div>
+  </div> --}}
 
 </x-app-layout>

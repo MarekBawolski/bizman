@@ -16,7 +16,7 @@
   </div>
 
   <div class="flex flex-col gap-4 mt-20 endpoints">
-    <a href="{{ url('clients') }}" class="font-bold items-center justify-between text-gray-500 rounded-md flex px-4 py-3 bg-white @if (request()->routeIs('clients')) {{ '!bg-blue-600 !text-white' }} @endif">
+    <a href="{{ url('clients') }}" class="font-semibold items-center justify-between text-gray-500 rounded-md flex px-4 py-3 bg-white @if (request()->routeIs('clients')) {{ '!bg-blue !text-white' }} @endif">
       <span class="label">
         {{ __('Baza klientów') }}
       </span>
@@ -29,9 +29,23 @@
 
       </span>
     </a>
-    <a href="{{ url('quotes') }}" class=" font-bold items-center justify-between text-gray-500 rounded-md flex px-4 py-3 bg-white @if (request()->routeIs('quotes')) {{ '!bg-blue-600 !text-white' }} @endif">
+    <a href="{{ url('quotes') }}" class=" font-semibold items-center justify-between text-gray-500 rounded-md flex px-4 py-3 bg-white @if (request()->routeIs('quotes')) {{ '!bg-blue !text-white' }} @endif">
       <span class="label">
         {{ __('Wyceny') }}
+      </span>
+      <span class="icon">
+        <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M17.0001 7L11.0001 1.74C10.4501 1.24805 9.73803 0.976068 9.00009 0.976068C8.26216 0.976068 7.55012 1.24805 7.00009 1.74L1.00009 7C0.682463 7.28407 0.428995 7.63256 0.256567 8.02224C0.0841385 8.41193 -0.00329256 8.83388 9.47941e-05 9.26V18C9.47941e-05 18.7956 0.316165 19.5587 0.878775 20.1213C1.44138 20.6839 2.20445 21 3.00009 21H15.0001C15.7957 21 16.5588 20.6839 17.1214 20.1213C17.684 19.5587 18.0001 18.7956 18.0001 18V9.25C18.0021 8.82556 17.9139 8.40554 17.7416 8.01768C17.5692 7.62982 17.3165 7.28296 17.0001 7ZM11.0001 19H7.00009V14C7.00009 13.7348 7.10545 13.4804 7.29299 13.2929C7.48052 13.1054 7.73488 13 8.00009 13H10.0001C10.2653 13 10.5197 13.1054 10.7072 13.2929C10.8947 13.4804 11.0001 13.7348 11.0001 14V19ZM16.0001 18C16.0001 18.2652 15.8947 18.5196 15.7072 18.7071C15.5197 18.8946 15.2653 19 15.0001 19H13.0001V14C13.0001 13.2043 12.684 12.4413 12.1214 11.8787C11.5588 11.3161 10.7957 11 10.0001 11H8.00009C7.20444 11 6.44138 11.3161 5.87877 11.8787C5.31616 12.4413 5.00009 13.2043 5.00009 14V19H3.00009C2.73488 19 2.48052 18.8946 2.29299 18.7071C2.10545 18.5196 2.00009 18.2652 2.00009 18V9.25C2.00027 9.10801 2.03069 8.9677 2.08931 8.83838C2.14794 8.70906 2.23343 8.59371 2.3401 8.5L8.34009 3.25C8.52258 3.08968 8.75719 3.00127 9.00009 3.00127C9.243 3.00127 9.47761 3.08968 9.66009 3.25L15.6601 8.5C15.7668 8.59371 15.8523 8.70906 15.9109 8.83838C15.9695 8.9677 15.9999 9.10801 16.0001 9.25V18Z"
+            fill="currentColor" />
+        </svg>
+      </span>
+    </a>
+
+
+    <a href="{{ url('user/settings') }}" class="font-semibold items-center justify-between text-gray-500 rounded-md flex px-4 py-3 bg-white @if (request()->routeIs('settings')) {{ '!bg-blue !text-white' }} @endif">
+      <span class="label">
+        {{ __('Ustawienia') }}
       </span>
       <span class="icon">
         <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">

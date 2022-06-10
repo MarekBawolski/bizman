@@ -15,9 +15,8 @@ class Quote extends Model
     protected $fillable = [
         'client_id',
         'user_id',
-        'status_id',
+        'state_id',
         'name',
-        'quote_elements',
         'calculate',
         'notes'
     ];
@@ -29,5 +28,13 @@ class Quote extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+    public function state()
+    {
+        return $this->belongsTo(QuoteState::class);
+    }
+    public function pricedItems()
+    {
+        return $this->belongsToMany(PricedItem::class);
     }
 }

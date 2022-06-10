@@ -55,6 +55,9 @@ class ClientController extends Controller
             'company_id' => 'max:255',
             'website' => 'max:255',
             'notes' => 'nullable|string',
+        ], [
+            'first_name.required' => 'Imię jest wymagane',
+            'last_name.required' => 'Nazwisko jest wymagane',
         ]);
 
         $attributes['user_id'] = auth()->id();
@@ -110,13 +113,15 @@ class ClientController extends Controller
             'company_id' => 'max:255',
             'website' => 'max:255',
             'notes' => 'nullable|string',
+        ], [
+            'first_name.required' => 'Imię jest wymagane',
+            'last_name.required' => 'Nazwisko jest wymagane',
         ]);
 
         $attributes['user_id'] = auth()->id();
 
         $client->update($attributes);
-
-        return back()->with('success', 'Klient zaktualizowany');
+        return redirect('/clients/' . $client->id)->with('success', 'Klient zaktualizowany');
     }
 
     /**

@@ -1,65 +1,86 @@
 <x-app-layout>
-  <x-slot name="header">
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
-      {{ __('Dodawanie wycen') }}
-    </h2>
-  </x-slot>
-  <form method="POST" action="/quotes" class="container flex flex-col gap-2 mx-auto mt-20">
+
+  @if (\Session::has('success'))
+    <x-toast success="success">
+      {!! \Session::get('success') !!}
+    </x-toast>
+  @endif
+
+  <form method="POST" action="/quotes">
     @csrf
-    <x-label for="name" :value="__('Nazwa')" />
-    <x-input type="text" name="name" :value="old('name')" />
-    @error('name')
-      <span class="text-red-700 error">{{ $message }}</span>
-    @enderror
+    <x-containers.outer title="Nowa wycena" buttonStyle="primary" buttonType="submit" buttonText="Dodaj">
+      <x-containers.inner title="Dane wyceny">
 
-    <x-label for="quote_elements" :value="__('Wycenione elementy')" />
-    <select name="quote_elements[]" id="quote_elements" multiple>
-      @foreach ($priced_items as $priced_item)
-        <option value="{{ $priced_item->id }}" @if (!empty(old('quote_elements')) && in_array($priced_item->id, old('quote_elements'))) {{ 'selected' }} @endif>{{ $priced_item->title }} ({{ $priced_item->work_hours }} rh - {{ $priced_item->jobType->abbreviation }})</option>
-      @endforeach
-    </select>
-    @error('quote_elements')
-      <span class="text-red-700 error">{{ $message }}</span>
-    @enderror
+        <x-inputs.text name="name" :value="old('name')" label="Tytuł">
+          @error('name')
+            <span class="text-xs text-red-700">{{ $message }}</span>
+          @enderror
+        </x-inputs.text>
 
-    <x-label for="status_id" :value="__('Status')" />
-    <select name="status_id" id="status_id">
-      <option value="" @if (!old('status_id')) {{ 'selected' }} @endif>{{ __('Wybierz status') }}</option>
-      @foreach ($states as $state)
-        <option value="{{ $state->id }}" @if (old('status_id') == $state->id) {{ 'selected' }} @endif>{{ $state->state }}</option>
-      @endforeach
-    </select>
-    @error('status_id')
-      <span class="text-red-700 error">{{ $message }}</span>
-    @enderror
 
-    <x-label for="client_id" :value="__('Klient')" />
-    <select name="client_id" id="client_id">
-      <option value="" @if (!old('client_id')) {{ 'selected' }} @endif>{{ __('Wybierz klienta') }}</option>
-      @foreach ($clients as $client)
-        <option value="{{ $client->id }}" @if (old('client_id') == $client->id) {{ 'selected' }} @endif>{{ $client->first_name }} {{ $client->last_name }}</option>
-      @endforeach
-    </select>
-    @error('client_id')
-      <span class="text-red-700 error">{{ $message }}</span>
-    @enderror
+        <x-label for="status_id" :value="__('Status')" />
+        <select name="status_id" id="status_id">
+          <option value="" {{ !old('status_id') ? 'selected' : '' }}>{{ __('Wybierz status') }}</option>
+          @foreach ($states as $state)
+            <option value="{{ $state->id }}" {{ old('status_id') == $state->id ? 'selected' : '' }}>
+              {{ $state->state }}</option>
+          @endforeach
+        </select>
+        @error('status_id')
+          <span class="text-red-700 error">{{ $message }}</span>
+        @enderror
 
-    <x-label for="calculate" :value="__('Kalkulator')" />
-    <textarea name="calculate" id="calculate">
 
-    </textarea>
-    @error('calculate')
-      <span class="text-red-700 error">{{ $message }}</span>
-    @enderror
+        <x-label for="client_id" :value="__('Klient')" />
+        <select name="client_id" id="client_id">
+          <option value="" {{ !old('client_id') ? 'selected' : '' }}>{{ __('Wybierz klienta') }}</option>
+          @foreach ($clients as $client)
+            <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>{{ $client->first_name }} {{ $client->last_name }}</option>
+          @endforeach
+        </select>
+        @error('client_id')
+          <span class="text-red-700 error">{{ $message }}</span>
+        @enderror
 
-    <x-label for="notes" :value="__('Uwagi')" />
-    <textarea name="notes" id="notes">
 
-    </textarea>
-    @error('notes')
-      <span class="text-red-700 error">{{ $message }}</span>
-    @enderror
+        <x-inputs.textarea name="notes" :value="old('notes')" class="col-span-2" label="Notatki">
+          @error('notes')
+            <span class="text-xs text-red-700">{{ $message }}</span>
+          @enderror
+        </x-inputs.textarea>
+      </x-containers.inner>
 
-    <button type="submit" class="px-4 py-2 mx-4 text-lg text-white duration-500 bg-blue-600 rounded hover:bg-blue-500">Zapisz</button>
+
+      <div class="grid grid-cols-2 gap-16">
+
+
+        <x-containers.inner title="Elementy wyceny">
+          <div class="max-h-[600px] h-full overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col">
+
+          </div>
+        </x-containers.inner>
+
+
+        <x-containers.inner title="Wycenione elementy">
+          <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col">
+            @foreach ($priced_items as $item)
+              <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4">
+                <div class="flex flex-col items-center justify-center add-to-quote">
+                  <span class="cursor-pointer btn-primary">+</span>
+                </div>
+                <div class="pl-4 item">
+                  <div class="mb-2 font-semibold title"> {{ $item->title }}</div>
+                  <div class="text-sm content"> {{ $item->content }}</div>
+                </div>
+                <div class="flex flex-col items-center justify-center border-l border-gray-300 job">
+                  <span class="font-semibold uppercase">{{ $item->jobType->abbreviation }}</span>
+                  <span>{{ $item->work_hours }}</span>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </x-containers.inner>
+      </div>
+    </x-containers.outer>
   </form>
 </x-app-layout>

@@ -16,7 +16,7 @@ class PricedItemSeeder extends Seeder
     public function run()
     {
         PricedItem::factory()
-            ->count(150)
+            ->count(500)
             ->create();
     }
 }

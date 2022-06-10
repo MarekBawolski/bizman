@@ -1,119 +1,58 @@
 <x-app-layout>
-  
-  <div class="flex flex-col justify-center min-h-screen p-20">
-    <div class="container mx-auto bg-white p-4 rounded-xl border border-gray-200 w-full">
-      <div class="flex flex-col xl:flex-row justify-center items-center xl:justify-between m-4">
-        <div>
-          @isset($client)
-            <h1 class="text-3xl font-extrabold">{{ $client->first_name }} {{ $client->last_name }}</h1>
-          @endisset ($client)
+  @if (\Session::has('success'))
+    <x-toast success="success">
+      {!! \Session::get('success') !!}
+    </x-toast>
+  @endif
+  <x-containers.outer title="{{ $client->first_name }} {{ $client->last_name }}" buttonStyle="secondary" :buttonLink="url('/clients/' . $client->id . '/edit')" buttonText="Edycja">
+    <div class="grid grid-cols-2 gap-16">
+      <x-containers.inner title="Dane klienta">
+        <div class="grid grid-cols-2 gap-4">
+          <x-inputs.text name="first_name" :value="$client->first_name" :disabled="true" label="Imię" />
+          <x-inputs.text name="last_name" :value="$client->last_name" :disabled="true" label="Nazwisko" />
+          <x-inputs.tel name="phone_number" :value="$client->phone_number" :disabled="true" label="Numer telefonu" />
+          <x-inputs.email name="email" :value="$client->email" :disabled="true" label="Adres email" />
+          <x-inputs.text name="address" :value="$client->address" :disabled="true" label="Adres" />
+          <x-inputs.text name="city" :value="$client->city" :disabled="true" label="Miasto" />
+          <x-inputs.text name="company" :value="$client->company" :disabled="true" label="Firma" />
+          <x-inputs.text name="tax_id" :value="$client->tax_id" :disabled="true" label="Regon" />
+          <x-inputs.text name="company_id" :value="$client->company_id" :disabled="true" label="NIP" />
+          <x-inputs.text name="website" :value="$client->website" :disabled="true" label="Strona" />
+          <x-inputs.textarea name="notes" :value="$client->notes" class="col-span-2" :disabled="true" label="Notatki" />
+          <x-inputs.text name="created_at" :value="\Carbon\Carbon::parse($client->created_at)->format('d.m.Y - H:m:s')" :disabled="true" label="Data dodania" />
+          <x-inputs.text name="updated_at" :value="\Carbon\Carbon::parse($client->updated_at)->format('d.m.Y - H:m:s')" :disabled="true" label="Ostatnia aktualizacja" />
         </div>
-        <div>
-        <a href="{{ url('/clients/' . $client->id . '/edit') }}">
-          <button type="submit" class="mt-4 xl:mt-0 px-8 py-2 mx-4 text-lg text-white duration-500 bg-blue-600 rounded hover:bg-blue-500">Edycja</button>
-        </a>
-        </div>
-      </div>
-      <div class="xl:flex bg-gray-100 mt-6 p-4 rounded-xl gap-10">
-        <div class="grow grid lg:grid-cols-2 gap-6">
-          <div>
-          <x-label for="first_name" :value="__('Imię')" />
-          <x-input type="text" name="first_name" :value="old('first_name', $client->first_name)" class="bg-gray-100 w-full" disabled />
-          @error('first_name')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="last_name" :value="__('Nazwisko')" />
-          <x-input type="text" name="last_name" :value="$client->last_name" class="bg-gray-100 w-full" disabled />
-          @error('last_name')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="phone_number" :value="__('Numer telefonu')" />
-          <x-input type="text" name="phone_number" :value="$client->phone_number" class="bg-gray-100 w-full" disabled />
-          @error('phone_number')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="email" :value="__('Email')" />
-          <x-input type="email" name="email" :value="$client->email" class="bg-gray-100 w-full" disabled />
-          @error('email')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="address" :value="__('Adres')" />
-          <x-input type="text" name="address" :value="$client->address" class="bg-gray-100 w-full" disabled />
-          @error('address')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="city" :value="__('Miasto')" />
-          <x-input type="text" name="city" :value="$client->city" class="bg-gray-100 w-full" disabled />
-          @error('city')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="company" :value="__('Firma')" />
-          <x-input type="text" name="company" :value="$client->company" class="bg-gray-100 w-full" disabled />
-          @error('company')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="tax_id" :value="__('Regon')" />
-          <x-input type="text" name="tax_id" :value="$client->tax_id" class="bg-gray-100 w-full" disabled />
-          @error('tax_id')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="company_id" :value="__('NIP')" />
-          <x-input type="text" name="company_id" :value="$client->company_id" class="bg-gray-100 w-full" disabled />
-          @error('company_id')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div>
-          <x-label for="website" :value="__('Strona')" />
-          <x-input type="text" name="website" :value="$client->website" class="bg-gray-100 w-full" disabled />
-          @error('website')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-          <div class="lg:col-span-2">
-          <x-label for="notes" :value="__('Notatki')" />
-          <x-input type="text" name="notes" :value="$client->notes" class="bg-gray-100 w-full" disabled />
-          @error('notes')
-            <span class="text-red-700 error">{{ $message }}</span>
-          @enderror
-          </div>
-        </div>
-        <div class="grow bg-white p-4 rounded-xl mt-10 xl:mt-0 overflow-auto xl:max-h-[32rem]">
-          <h2 class="my-4 text-xl font-bold">Wyceny:</h2>
-          @if (count($quotes) > 0)
-            <ul class="flex flex-col gap-4">
-              @foreach ($quotes as $quote)
-                <li class="">
-                  <a class="block px-8 py-4 bg-white rounded-md hover:bg-green-100" href="">
+      </x-containers.inner>
+      <x-containers.inner title="Lista wycen">
+        @if (count($quotes) > 0)
+          <ul class="flex flex-col gap-4 max-h-[600px] overflow-auto">
+            @foreach ($quotes as $quote)
+              <li class="">
+                <a href="{{ url('/quotes/' . $quote->id) }}" class="block px-8 py-4 transition-all bg-white rounded-md hover:bg-blue hover:text-white">
+                  <div class="flex gap-4 mb-4">
+                    <div class="text-xs created-at">
+                      <span>Utworzono:</span> <span class="font-semibold">{{ \Carbon\Carbon::parse($quote->created_at)->format('d.m.Y') }}</span>
+                    </div>
+                    <div class="text-xs updated-at">
+                      <span>Ostatnia aktualizacja:</span> <span class="font-semibold">{{ \Carbon\Carbon::parse($quote->updated_at)->format('d.m.Y') }}</span>
+                    </div>
+                  </div>
+                  <div class="text-base">
                     {{ $quote->name }}
-                  </a>
-                </li>
-              @endforeach
-            </ul>
-          @else
-            <div class="empty">
-              {{ __('Brak wycen') }}
-            </div>
-          @endif ($quotes)
-        </div>    
-      </div>
+                  </div>
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        @else
+          <div class="empty">
+            {{ __('Brak wycen') }}
+          </div>
+        @endif ($quotes)
+      </x-containers.inner>
     </div>
-  </div>
+
+  </x-containers.outer>
+
 
 </x-app-layout>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Quote;
 use Database\Factories\QuoteStateFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,8 +18,8 @@ class QuoteState extends Model
         return QuoteStateFactory::new();
     }
 
-    public function pricedItems()
+    public function quote()
     {
-        return $this->hasMany(PricedItem::class);
+        return $this->hasMany(Quote::class);
     }
 }

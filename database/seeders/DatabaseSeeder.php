@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             JobTypeSeeder::class,
             PricedItemSeeder::class,
             QuoteStateSeeder::class,
-            QuoteSeeder::class
+            QuoteSeeder::class,
+            PricedItemQuoteSeeder::class
         ]);
     }
 }

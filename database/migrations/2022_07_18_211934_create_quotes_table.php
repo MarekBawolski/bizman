@@ -17,9 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('status_id')->nullable();
+            $table->foreignId('state_id')->references('id')->on('quote_states')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name')->nullable();
-            $table->longText('quote_elements')->nullable();
             $table->longText('calculate')->nullable();
             $table->longText('notes')->nullable();
             $table->timestamp('created_at')->useCurrent();

@@ -22,4 +22,8 @@ class PricedItem extends Model
     {
         return $this->belongsTo(JobType::class);
     }
+    public function quotes()
+    {
+        return $this->belongsToMany(Quote::class);
+    }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('settings_id')->references('id')->on('user_settings')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('state');
+            $table->string('color');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

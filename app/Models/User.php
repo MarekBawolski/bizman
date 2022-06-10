@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Client;
+use App\Models\PricedItem;
+use App\Models\Quote;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,5 +50,17 @@ class User extends Authenticatable
     public function clients()
     {
         return $this->hasMany(Client::class);
+    }
+    public function pricedItems()
+    {
+        return $this->hasMany(PricedItem::class);
+    }
+    public function quoteStates()
+    {
+        return $this->hasMany(QuoteState::class);
+    }
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
     }
 }

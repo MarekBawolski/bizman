@@ -1,0 +1,23 @@
+/* ./resources/sass/app.scss */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@layer components {
+  .btn-primary {
+    @apply text-base h-fit text-white bg-blue px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-blue border-2 transition-all font-semibold hover:text-blue hover:bg-white focus:outline-none;
+  }
+  .btn-secondary {
+    @apply text-base h-fit text-white bg-yellow px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-yellow border-2 transition-all font-semibold hover:text-yellow hover:bg-white focus:outline-none;
+  }
+}
+*{
+    @apply font-primary;
+}
+
+.table-archive{
+    td{
+    a{
+    @apply hover:text-blue;
+    }
+    }
+}

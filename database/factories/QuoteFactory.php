@@ -20,17 +20,15 @@ class QuoteFactory extends Factory
      */
     public function definition()
     {
-        $client = Client::all()->random();
-        $user = User::all()->random();
-        $items = PricedItem::all()->where('user_id', $user->id)->random($this->faker->numberBetween(3, 12))->pluck('id');
-        $status = QuoteState::all()->where('user_id', $user->id)->random();
 
+        $user = User::all()->random();
+        $client = Client::all()->where('user_id', $user->id)->random();
+        $state = QuoteState::all()->where('user_id', $user->id)->random();
         return [
             'client_id' => $client->id,
             'user_id' => $user->id,
-            'status_id' => $status->id,
-            'name' => $this->faker->catchPhrase(),
-            'quote_elements' => json_encode($items->toArray()),
+            'state_id' => $state->id,
+            'name' => $this->faker->realText(20),
         ];
     }
 }

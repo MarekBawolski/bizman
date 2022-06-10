@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\JobType;
 use App\Models\PricedItem;
 use App\Models\Quote;
 use App\Models\QuoteState;
@@ -50,7 +51,7 @@ class QuoteController extends Controller
     {
         $attributes = $request->validate([
             'client_id' => 'required',
-            'status_id' => 'required',
+            'state_id' => 'required',
             'name' => 'required',
             'quote_elements' => 'required',
             'calculate' => 'nullable|string',
@@ -76,8 +77,12 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote)
     {
-        //
+        return view('quotes.show', [
+            'quote' => $quote,
+            'jobtypes' => JobType::all()->where('user_id', Auth::user()->id)
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -87,7 +92,12 @@ class QuoteController extends Controller
      */
     public function edit(Quote $quote)
     {
-        //
+        $results = PricedItem::where('user_id', Auth::user()->id)->paginate(10);
+        return view('quotes.edit', [
+            'quote' => $quote,
+            'selected' => $quote->pricedItems,
+            'items' => $results
+        ]);
     }
 
     /**

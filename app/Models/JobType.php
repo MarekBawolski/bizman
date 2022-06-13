@@ -12,6 +12,8 @@ class JobType extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = ['user_id', 'type', 'abbreviation'];
+
     protected static function newFactory()
     {
         return JobTypeFactory::new();

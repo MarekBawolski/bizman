@@ -1,4 +1,4 @@
- <div id="toast" {{ $attributes->class(['flex items-center w-full max-w-xs p-4 text-white  rounded-lg shadow bg-blue fixed z-10 right-4 bottom-4 ', 'success' => $success]) }} role="alert">
+ <div id="toast" {{ $attributes->class(['flex items-center w-full max-w-xs p-4 text-white  rounded-lg shadow  fixed z-10 right-4 bottom-4 ', 'success' => $success]) }} role="alert">
    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg ">
      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
        <path fill-rule="evenodd"
@@ -7,7 +7,7 @@
      </svg>
    </div>
    <div class="ml-3 text-sm font-normal">{{ $slot }}</div>
-   <button onclick="getElementById('toast').remove()" type="button" class="ml-auto -mx-1.5 -my-1.5 bg-blue border border-white text-white hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 "
+   <button onclick="getElementById('toast').remove()" type="button" class="ml-auto -mx-1.5 -my-1.5  border border-white text-white hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 "
      data-dismiss-target="#toast-default" aria-label="Close">
      <span class="sr-only">Close</span>
      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

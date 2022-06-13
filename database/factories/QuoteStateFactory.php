@@ -23,7 +23,6 @@ class QuoteStateFactory extends Factory
         $user = User::all()->random();
         return [
             'user_id' => $user->id,
-            'settings_id' => $user->id,
             'state' => $this->faker->word(),
             'color' => $this->faker->hexcolor()
         ];

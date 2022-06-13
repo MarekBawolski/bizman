@@ -27,7 +27,6 @@ class JobTypeFactory extends Factory
         $jobTitle = $this->faker->jobTitle();
         $user = User::all()->random();
         return [
-            'settings_id' => $user->id,
             'user_id' => $user->id,
             'type' => $jobTitle,
             'abbreviation' => substr($jobTitle, 0, 2)

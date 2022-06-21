@@ -1,6 +1,12 @@
 <x-app-layout>
 
 <script src="{{ asset('/js/jscolor.js') }} "></script>
+<script>
+// These options apply to all color pickers on the page
+jscolor.presets.default = {
+	previewPosition:'right'
+};
+</script>
   @dump($errors)
 
   @if (\Session::has('success'))
@@ -28,7 +34,7 @@
               @endphp
               <div class="mb-2 state-wrapper gap-4 grid grid-cols-[auto_180px_50px]">
                 <x-inputs.text class="quote-state" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][state]" :value="$state->state" :errorKey="'states.' . $loop->iteration . '.state'" />
-                <x-inputs.text class="quote-color" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][color]" :value="$state->color" :suffix="$suffix" :errorKey="'states.' . $loop->iteration . '.color'" data-jscolor="{}"/>
+                <x-inputs.text class="quote-color rounded-lg" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][color]" :value="$state->color" :errorKey="'states.' . $loop->iteration . '.color'" data-jscolor="{}"/>
                 <x-inputs.hidden name="states[{{ $loop->iteration }}][id]" :value="$state->id" />
                 <x-buttons.delete class="h-full px-3 mx-auto text-sm reverse delete-quote-state" data-quotestate_id="{{ $state->id }}">
                   Usuń

@@ -1,9 +1,12 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            <div class="flex flex-col justify-center items-center">
+                <a href="/">
+                    <x-auth-logo />
+                </a>
+                <span class="text-3xl font-extrabold mt-4">Zweryfikuj email</span>
+            </div>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -21,9 +24,9 @@
                 @csrf
 
                 <div>
-                    <x-button>
+                    <x-buttons.primary type="submit" class="flex justify-center mt-2">
                         {{ __('Resend Verification Email') }}
-                    </x-button>
+                    </x-buttons.primary>
                 </div>
             </form>
 
@@ -31,7 +34,7 @@
                 @csrf
 
                 <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
+                    {{ __('Wyloguj') }}
                 </button>
             </form>
         </div>

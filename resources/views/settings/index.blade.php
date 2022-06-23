@@ -7,8 +7,6 @@ jscolor.presets.default = {
 	previewPosition:'right'
 };
 </script>
-  @dump($errors)
-
   @if (\Session::has('success'))
     <x-toast success="success">
       {!! \Session::get('success') !!}
@@ -17,7 +15,7 @@ jscolor.presets.default = {
   <form id="settings_data" method="POST" action="/user/settings">
     @csrf
     @method('PATCH')
-    <x-containers.outer title="Ustawienia" buttonStyle="primary" buttonType="submit" buttonText="Zapsiz zmiany">
+    <x-containers.outer title="Ustawienia" buttonStyle="primary" buttonType="submit" buttonText="Zapisz zmiany">
 
       <x-containers.inner title="Statusy wycen">
         <span id="quote_states_wrapper">
@@ -29,9 +27,6 @@ jscolor.presets.default = {
           </div>
           @if ($quote_states->isNotEmpty())
             @foreach ($quote_states as $state)
-              @php
-                $suffix = '<span class="block w-6 h-6" style="background-color:' . $state->color . ';"></span>';
-              @endphp
               <div class="mb-2 state-wrapper gap-4 grid grid-cols-[auto_180px_50px]">
                 <x-inputs.text class="quote-state" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][state]" :value="$state->state" :errorKey="'states.' . $loop->iteration . '.state'" />
                 <x-inputs.text class="quote-color rounded-lg" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][color]" :value="$state->color" :errorKey="'states.' . $loop->iteration . '.color'" data-jscolor="{}"/>

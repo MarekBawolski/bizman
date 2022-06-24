@@ -1,41 +1,41 @@
 /* ./resources/sass/app.scss */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 @layer components {
-  .btn-primary {
-    @apply text-base h-fit text-white bg-blue px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-blue border-2 transition-all font-semibold hover:text-blue hover:bg-white focus:outline-none;
-  }
-  .btn-secondary {
-    @apply text-base h-fit text-white bg-yellow px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-yellow border-2 transition-all font-semibold hover:text-yellow hover:bg-white focus:outline-none;
-  }
-
-  .btn-delete {
-    @apply text-base h-fit text-white bg-red-600 px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-red-600 border-2 transition-all font-semibold hover:text-red-600 hover:bg-white focus:outline-none;
-    &.reverse{
-        @apply bg-white text-red-600 hover:bg-red-600 hover:text-white;
+    .btn-primary {
+        @apply text-base h-fit text-white bg-blue px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-blue border-2 transition-all font-semibold hover:text-blue hover:bg-white focus:outline-none;
+    }
+    .btn-secondary {
+        @apply text-base h-fit text-white bg-yellow px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-yellow border-2 transition-all font-semibold hover:text-yellow hover:bg-white focus:outline-none;
     }
 
-  .btn-gray {
-    @apply text-base h-fit text-black bg-main-gray px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-main-gray border-2 transition-all font-semibold hover:text-black hover:bg-white hover:border-black focus:outline-none;
+    .btn-delete {
+        @apply text-base h-fit text-white bg-red-600 px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-red-600 border-2 transition-all font-semibold hover:text-red-600 hover:bg-white focus:outline-none;
+        &.reverse {
+            @apply bg-white text-red-600 hover:bg-red-600 hover:text-white;
+        }
 
-  }
-}
-*{
-    @apply font-primary;
-}
-#toast{
-    &.success{
-        @apply bg-green-600;
-        button{
-        @apply bg-white text-black;
+        .btn-gray {
+            @apply text-base h-fit text-black bg-main-gray px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-main-gray border-2 transition-all font-semibold hover:text-black hover:bg-white hover:border-black focus:outline-none;
         }
     }
 }
-.table-archive{
-    td{
-    a{
-    @apply hover:text-blue;
+* {
+    @apply font-primary;
+}
+#toast {
+    &.success {
+        @apply bg-green-600;
+        button {
+            @apply bg-white text-black;
+        }
     }
+}
+.table-archive {
+    td {
+        a {
+            @apply hover:text-blue;
+        }
     }
 }

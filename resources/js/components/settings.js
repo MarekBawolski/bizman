@@ -68,20 +68,20 @@ class Settings {
     }
 
     addListeners = () => {
-        if (this.deleteStates.length) {
-            this.deleteStates.forEach(el => {
-                el.addEventListener('click', e => {
-                    this.handleDeleteQuoteState(el)
-                })
+        this.deleteStates.forEach(el => {
+            el.addEventListener('click', e => {
+                this.handleDeleteQuoteState(el)
             })
-        }
+        })
 
         this.addNewQuoteState.addEventListener('click', e => {
             this.quoteStateAddTemplate()
         })
     }
     init = () => {
-        this.addListeners()
+        if (this.deleteStates.length) {
+            this.addListeners()
+        }
     }
 }
 

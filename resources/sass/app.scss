@@ -9,6 +9,9 @@
   .btn-secondary {
     @apply text-base h-fit text-white bg-yellow px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-yellow border-2 transition-all font-semibold hover:text-yellow hover:bg-white focus:outline-none;
   }
+  .btn-gray {
+    @apply text-base h-fit text-black bg-main-gray px-6 py-2 flex items-center gap-1 w-fit rounded-lg border-main-gray border-2 transition-all font-semibold hover:text-black hover:bg-white hover:border-black focus:outline-none;
+  }
 }
 *{
     @apply font-primary;

@@ -1,9 +1,12 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            <div class="flex flex-col justify-center items-center">
+                <a href="/">
+                    <x-auth-logo />
+                </a>
+                <span class="text-3xl font-extrabold mt-4">Resetowanie hasła</span>
+            </div>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -27,9 +30,11 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
+                
+                <x-buttons.primary type="submit" class="flex justify-center w-full mt-2">
                     {{ __('Email Password Reset Link') }}
-                </x-button>
+                </x-buttons.primary>
+
             </div>
         </form>
     </x-auth-card>

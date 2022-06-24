@@ -3,9 +3,9 @@
         <x-slot name="logo">
             <div class="flex flex-col justify-center items-center">
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <x-auth-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a>
-                <span class="text-3xl font-extrabold mt-4">Zarejestruj się</span>
+                <span class="text-3xl font-extrabold mt-4">Rejestracja</span>
             </div>
         </x-slot>
 
@@ -48,13 +48,13 @@
                                 name="password_confirmation" required />
             </div>
 
-            <x-button class="flex justify-center mt-8">
-                {{ __('Rejestracja') }}
-            </x-button>
+            <x-buttons.primary type="submit" class="flex justify-center w-full mt-8">
+                {{ __('Zarejestruj się') }}
+            </x-buttons.primary>
         </form>
 
         <div class="flex justify-center mt-4">
-            Masz już konto?<a class="ml-2 text-blue-600" href="{{ route('login') }}">{{ __('Zaloguj się') }}</a>
+            Masz już konto?<a class="ml-2 text-blue" href="{{ route('login') }}">{{ __('Zaloguj się') }}</a>
         </div>
         
     </x-auth-card>

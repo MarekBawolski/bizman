@@ -35,7 +35,8 @@ Route::get('/dashboard', function () {
     USER
 */
 Route::get('/user/settings', [UserSettingController::class, 'index'])->middleware(['auth'])->name('settings');
-Route::post('/user/settings', [UserSettingController::class, 'store'])->middleware(['auth']);
+Route::patch('/user/settings', [UserSettingController::class, 'update'])->middleware(['auth']);
+
 /*
     CLIENTS
 */

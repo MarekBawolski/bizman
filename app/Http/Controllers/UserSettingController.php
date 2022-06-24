@@ -6,7 +6,9 @@ use App\Models\JobType;
 use App\Models\QuoteState;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserSettingController extends Controller
 {
@@ -43,7 +45,6 @@ class UserSettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -63,7 +64,7 @@ class UserSettingController extends Controller
      * @param  \App\Models\UserSetting  $userSetting
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserSetting $userSetting)
+    public function edit(Request $request, UserSetting $userSetting)
     {
         //
     }
@@ -77,7 +78,67 @@ class UserSettingController extends Controller
      */
     public function update(Request $request, UserSetting $userSetting)
     {
-        //
+        $rules =  [
+            'states.*.state' => 'required',
+            'states.*.color' =>  'regex:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/',
+            'jobtypes.*.type' => 'required',
+            'jobtypes.*.abbreviation' => 'required',
+            'jobtypes.*.id' => 'nullable',
+            'states.*.id' => 'nullable',
+            'delete.states.*' => 'required',
+            'delete.jobtypes.*' => 'required'
+        ];
+        $messages = [
+            'states.*.state.required' => 'Pole jest wymagane',
+            'states.*.color.regex' => 'Wymagany format HEX',
+            'jobtypes.*.type.required' => 'Pole jest wymagane',
+            'jobtypes.*.abbreviation.required' => 'Pole jest wymagane',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect('user/settings')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $validated = $validator->validated();
+        if (array_key_exists('states', $validated)) {
+
+            foreach ($validated['states'] as $key => $data) {
+
+                $data['user_id'] = auth()->id();
+                $quoteState = QuoteState::updateOrCreate(
+                    ['id' => array_key_exists('id', $data) ? (int)$data['id'] : false],
+                    $data
+                );
+            }
+        }
+        if (array_key_exists('jobtypes', $validated)) {
+
+            foreach ($validated['jobtypes'] as $key => $data) {
+                $data['user_id'] = auth()->id();
+                $jobType = JobType::updateOrCreate(
+                    ['id' => array_key_exists('id', $data) ? (int)$data['id'] : false],
+                    $data
+                );
+            }
+        }
+
+        if (array_key_exists('delete', $validated)) {
+            if (array_key_exists('states', $validated['delete'])) {
+                foreach ($validated['delete']['states'] as $stateId) {
+                    $deletedRows = QuoteState::where('user_id', auth()->id())->where('id', (int)$stateId)->delete();
+                }
+            }
+
+            if (array_key_exists('jobtypes', $validated['delete'])) {
+                foreach ($validated['delete']['jobtypes'] as $jobTypeId) {
+                    $deletedRows = JobType::where('user_id', auth()->id())->where('id', (int)$jobTypeId)->delete();
+                }
+            }
+        }
+
+        return redirect('/user/settings/')->with('success', 'Ustawienia zaktualizowane');
     }
 
     /**

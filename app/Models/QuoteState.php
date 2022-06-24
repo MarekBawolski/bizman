@@ -13,6 +13,8 @@ class QuoteState extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = ['user_id', 'state', 'color'];
+
     protected static function newFactory()
     {
         return QuoteStateFactory::new();

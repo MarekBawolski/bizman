@@ -3,9 +3,9 @@
         <x-slot name="logo">
             <div class="flex flex-col justify-center items-center">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-auth-logo />
             </a>
-            <span class="text-3xl font-extrabold mt-4">Zaloguj się</span>
+            <span class="text-3xl font-extrabold mt-4">Logowanie</span>
             </div>
         </x-slot>
 
@@ -38,7 +38,7 @@
             <!-- Remember Me, Forgot Password-->
             <div class="flex justify-between mt-4">
                 <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" name="remember">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-blue shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" name="remember">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Zapamiętaj mnie') }}</span>
                 </label>
 
@@ -51,13 +51,14 @@
                 </div>
             </div>
 
-            <x-button class="flex justify-center mt-8">
-                {{ __('Logowanie') }}
-            </x-button>
+            <x-buttons.primary type="submit" class="flex justify-center w-full mt-8">
+                {{ __('Zaloguj się') }}
+            </x-buttons.primary>
+            
         </form>
 
         <div class="flex justify-center mt-4">
-            Nie masz konta? <a href="{{ route('register') }}" class="ml-2 text-blue-600">Zarejestruj się</a>
+            Nie masz konta? <a href="{{ route('register') }}" class="ml-2 text-blue">Zarejestruj się</a>
         </div>
         
     </x-auth-card>

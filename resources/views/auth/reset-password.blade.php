@@ -3,9 +3,9 @@
         <x-slot name="logo">
             <div class="flex flex-col justify-center items-center">
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <x-auth-logo />
                 </a>
-                <span class="text-3xl font-extrabold mt-4">Zresetuj hasło</span>
+                <span class="text-3xl font-extrabold mt-4">Resetowanie hasła</span>
             </div>
         </x-slot>
 
@@ -41,9 +41,10 @@
                                     name="password_confirmation" required />
             </div>
 
-            <x-button class="flex justify-center mt-8">
+            <x-buttons.primary type="submit" class="flex justify-center w-full mt-8">
                 {{ __('Zapisz') }}
-            </x-button>
+            </x-buttons.primary>
+
         </form>
     </x-auth-card>
 </x-guest-layout>

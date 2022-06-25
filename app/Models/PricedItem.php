@@ -15,7 +15,6 @@ class PricedItem extends Model
     protected $fillable = [
         'title',
         'content',
-        'content',
         'work_hours',
         'user_id',
         'job_type_id'

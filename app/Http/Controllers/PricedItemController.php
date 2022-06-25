@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobType;
 use App\Models\PricedItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,9 @@ class PricedItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('priceditems.create', [
+            'types' => JobType::all()->where('user_id', Auth::user()->id)
+        ]);
     }
 
     /**
@@ -37,7 +40,23 @@ class PricedItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'work_hours' => 'required',
+            'job_type_id' => 'required',
+        ], [
+            'title.required' => 'Tytuł jest wymagany',
+            'content.required' => 'Treść jest wymagana',
+            'work_hours.required' => 'Godziny są wymagane',
+            'job_type_id.required' => 'Rodzaj prac jest wymagany',
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+
+        PricedItem::create($attributes);
+
+        return redirect('/priceditems')->with('success', 'Elemnt dodany');
     }
 
     /**
@@ -61,7 +80,11 @@ class PricedItemController extends Controller
      */
     public function edit(PricedItem $pricedItem)
     {
-        //
+        return view('priceditems.edit', [
+            'pricedItem' => $pricedItem,
+            'types' => JobType::all()->where('user_id', Auth::user()->id)
+
+        ]);
     }
 
     /**
@@ -73,7 +96,21 @@ class PricedItemController extends Controller
      */
     public function update(Request $request, PricedItem $pricedItem)
     {
-        //
+        $attributes = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'work_hours' => 'required',
+            'job_type_id' => 'required',
+        ], [
+            'title.required' => 'Tytuł jest wymagany',
+            'content.required' => 'Treść jest wymagana',
+            'work_hours.required' => 'Godziny są wymagane',
+            'job_type_id.required' => 'Rodzaj prac jest wymagany',
+        ]);
+        $attributes['user_id'] = auth()->id();
+
+        $pricedItem->update($attributes);
+        return redirect('/priceditems/' . $pricedItem->id)->with('success', 'Element zaktualizowany');
     }
 
     /**
@@ -84,6 +121,7 @@ class PricedItemController extends Controller
      */
     public function destroy(PricedItem $pricedItem)
     {
-        //
+        $pricedItem->delete();
+        return back()->with('success', 'Element ' . $pricedItem->title  . ' został usunięty');
     }
 }

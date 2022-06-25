@@ -68,9 +68,9 @@ Route::get('/priceditems', [PricedItemController::class, 'index'])->middleware([
 Route::post('/priceditems', [PricedItemController::class, 'store'])->middleware(['auth']);
 Route::get('/priceditems/create', [PricedItemController::class, 'create'])->middleware(['auth']);
 Route::get('/priceditems/{pricedItem}', [PricedItemController::class, 'show'])->middleware(['can:view-item,pricedItem'])->name('priceditems')->where('pricedItem', '[0-9]+');
-Route::patch('/priceditems/{priceditem}', [PricedItemController::class, 'update'])->middleware(['can:edit-item,pricedItem'])->name('priceditems')->where('priceditem', '[0-9]+');
-Route::get('/priceditems/{priceditem}/edit', [PricedItemController::class, 'edit'])->middleware(['can:edit-item,priceditem'])->name('priceditems')->where('priceditem', '[0-9]+');
-Route::delete('/priceditems/{priceditem}', [PricedItemController::class, 'destroy'])->middleware(['can:edit-item,priceditem'])->name('priceditems')->where('priceditem', '[0-9]+');
+Route::patch('/priceditems/{pricedItem}', [PricedItemController::class, 'update'])->middleware(['can:edit-item,pricedItem'])->name('priceditems')->where('pricedItem', '[0-9]+');
+Route::get('/priceditems/{pricedItem}/edit', [PricedItemController::class, 'edit'])->middleware(['can:edit-item,pricedItem'])->name('priceditems')->where('pricedItem', '[0-9]+');
+Route::delete('/priceditems/{pricedItem}', [PricedItemController::class, 'destroy'])->middleware(['can:edit-item,pricedItem'])->name('priceditems')->where('pricedItem', '[0-9]+');
 
 
 require __DIR__ . '/auth.php';

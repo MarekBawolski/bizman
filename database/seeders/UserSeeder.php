@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         //
         DB::table('users')->insert([
             'name' => 'Wojtek',
-            'email' => 'wojtek@bizman.pl',
+            'email' => 'demo@bizman.pl',
             'password' => Hash::make('password'),
             'email_verified_at' => Carbon::now()->addSeconds(1),
             'remember_token' => true,

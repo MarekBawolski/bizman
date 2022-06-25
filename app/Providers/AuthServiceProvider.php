@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Client;
+use App\Models\PricedItem;
 use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -51,6 +52,18 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $quote->user_id
                 ? Response::allow()
                 : Response::deny('You dont have access to this quote');
+        });
+
+        Gate::define('view-item', function (User $user, PricedItem $priceditem) {;
+            return $user->id === $priceditem->user_id
+                ? Response::allow()
+                : Response::deny('You dont have access to this item');
+        });
+
+        Gate::define('edit-item', function (User $user,  PricedItem $priceditem) {;
+            return $user->id === $priceditem->user_id
+                ? Response::allow()
+                : Response::deny('You dont have access to this item');
         });
     }
 }

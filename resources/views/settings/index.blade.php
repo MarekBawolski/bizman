@@ -1,12 +1,4 @@
 <x-app-layout>
-
-<script src="{{ asset('/js/jscolor.js') }} "></script>
-<script>
-// These options apply to all color pickers on the page
-jscolor.presets.default = {
-	previewPosition:'right'
-};
-</script>
   @if (\Session::has('success'))
     <x-toast success="success">
       {!! \Session::get('success') !!}

@@ -72,7 +72,7 @@
                 {{ $quote->client->company }}
               </x-table.cell>
               <x-table.cell>
-                <strong class="px-3 py-1 rounded-lg bg-opacity-20" style="background-color:{{ $quote->state->color }}">
+                <strong class="px-3 py-1 rounded-lg bg-opacity-20 text-gray-900" style="background-color:{{ $quote->state->color }}">
                   {{ $quote->state->state }}
                 </strong>
 

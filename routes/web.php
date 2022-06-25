@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExperimentController;
+use App\Http\Controllers\PricedItemController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\UserSettingController;
 use App\Models\Client;
@@ -63,7 +64,13 @@ Route::delete('/quotes/{quote}', [QuoteController::class, 'destroy'])->middlewar
     PRICED ITEMS
 */
 //TODO
-Route::get('experiment', [ExperimentController::class, 'index'])
-    ->name('experiment');
+Route::get('/priceditems', [PricedItemController::class, 'index'])->middleware(['auth'])->name('priceditems');
+Route::post('/priceditems', [PricedItemController::class, 'store'])->middleware(['auth']);
+Route::get('/priceditems/create', [PricedItemController::class, 'create'])->middleware(['auth']);
+Route::get('/priceditems/{pricedItem}', [PricedItemController::class, 'show'])->middleware(['can:view-item,pricedItem'])->name('priceditems')->where('pricedItem', '[0-9]+');
+Route::patch('/priceditems/{priceditem}', [PricedItemController::class, 'update'])->middleware(['can:edit-item,pricedItem'])->name('priceditems')->where('priceditem', '[0-9]+');
+Route::get('/priceditems/{priceditem}/edit', [PricedItemController::class, 'edit'])->middleware(['can:edit-item,priceditem'])->name('priceditems')->where('priceditem', '[0-9]+');
+Route::delete('/priceditems/{priceditem}', [PricedItemController::class, 'destroy'])->middleware(['can:edit-item,priceditem'])->name('priceditems')->where('priceditem', '[0-9]+');
+
 
 require __DIR__ . '/auth.php';

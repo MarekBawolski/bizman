@@ -6,6 +6,7 @@
   @endif
   <x-containers.outer-archive title="Wyceny" buttonStyle="primary" :buttonLink="url('/quotes/create')" buttonText="Dodaj nową wycenę" searchAction="/quotes">
     @isset($quotes)
+
     <x-table.wrapper>
       <x-table.header>
         <x-table.header-row>
@@ -100,6 +101,7 @@
       </x-table.body>
     </x-table.wrapper>
     {!! $quotes->links() !!}
+
     @endisset
   </x-containers.outer-archive>
 </x-app-layout>

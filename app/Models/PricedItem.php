@@ -12,7 +12,14 @@ class PricedItem extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
+    protected $fillable = [
+        'title',
+        'content',
+        'content',
+        'work_hours',
+        'user_id',
+        'job_type_id'
+    ];
     protected static function newFactory()
     {
         return PricedItemFactory::new();
@@ -25,5 +32,12 @@ class PricedItem extends Model
     public function quotes()
     {
         return $this->belongsToMany(Quote::class);
+    }
+    public function scopeSearch($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('id', 'like', '%' . request('search') . '%');
+        }
     }
 }

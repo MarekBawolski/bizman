@@ -10,6 +10,9 @@ module.exports = {
 
     theme: {
         extend: {
+            boxShadow: {
+                'toast': '10px 10px 15px  rgba(0, 0, 0, 0.4)',
+              },
             colors: {
                 blue: '#3B82F6',
                 gray: {

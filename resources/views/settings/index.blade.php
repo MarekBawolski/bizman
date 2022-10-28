@@ -9,7 +9,7 @@
     @method('PATCH')
     <x-containers.outer title="Ustawienia" buttonStyle="primary" buttonType="submit" buttonText="Zapisz zmiany">
 
-      <x-containers.inner title="Statusy wycen">
+      <x-containers.collapse title="Statusy wycen">
         <span id="quote_states_wrapper">
 
           <div class="mb-2  gap-4 grid grid-cols-[auto_180px_50px]">
@@ -42,9 +42,9 @@
           Dodaj nowy
           <x-icons.add />
         </x-buttons.primary>
-      </x-containers.inner>
+      </x-containers.collapse>
 
-      <x-containers.inner title="Rodzaje wykonywanych prac">
+      <x-containers.collapse title="Rodzaje wykonywanych prac">
         @if ($job_types->isNotEmpty())
           <div class="grid grid-cols-[auto_180px_50px] gap-4 mb-2 ">
             <x-titles.text>Nazwa</x-titles.text>
@@ -73,7 +73,7 @@
           <x-icons.add />
         </x-buttons.primary>
 
-      </x-containers.inner>
+      </x-containers.collapse>
     </x-containers.outer>
   </form>
 

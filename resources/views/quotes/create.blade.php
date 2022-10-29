@@ -57,6 +57,7 @@
         <x-containers.inner title="Elementy wyceny">
           <div class="max-h-[600px] h-full overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col">
 
+            
           </div>
         </x-containers.inner>
 

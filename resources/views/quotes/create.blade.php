@@ -55,18 +55,18 @@
 
 
         <x-containers.inner title="Elementy wyceny">
-          <div class="max-h-[600px] h-full overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col" id="dodane">
+          <div class="max-h-[600px] h-full overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-add-quote">
             
           </div>
         </x-containers.inner>
 
 
         <x-containers.inner title="Wycenione elementy">
-          <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col" id="usuniete">
+          <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes">
             @foreach ($priced_items as $item)
               <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4" id="item{{$item->id}}">
-                <div class="flex flex-col items-center justify-center add-to-quote">
-                  <span class="cursor-pointer btn-primary" id="item{{$item->id}}_button" onclick="clone('item{{$item->id}}')">+</span>
+                <div class="flex flex-col items-center justify-center add-to-quote" data-element_id="{{$item->id}}" data-element_title="{{$item->title}}" data-element_content="{{$item->content}}">
+                  <span class="cursor-pointer btn-primary" id="item{{$item->id}}_button">+</span>
                 </div>
                 <div class="pl-4 item">
                   <div class="mb-2 font-semibold title" id="item{{$item->id}}_title">{{ $item->title }}</div>
@@ -86,8 +86,8 @@
 </x-app-layout>
 
 
+<!--
 <script type="text/javascript">
-window.licznik=0
 function clone(id){
   /*alert(id)
   var myDiv = id;
@@ -98,7 +98,7 @@ function clone(id){
   var idbutton=document.getElementById("item3button")
   alert(idbutton)
   document.getElementById(idbutton).addClass(disabled);*/
-  var div = document.getElementById(id);
+  /*var div = document.getElementById(id);
 
   var divTitle = document.getElementById(id+"_title");
   var divCloneTitle = document.createElement("input");
@@ -140,5 +140,5 @@ function abc(id){
   divTitle.replaceWith(divCloneTitle);
   divContent.replaceWith(divCloneContent);
   usuniete.appendChild(div);
-}
-</script>
+}*/
+</script>-->

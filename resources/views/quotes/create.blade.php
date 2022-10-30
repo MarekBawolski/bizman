@@ -55,27 +55,26 @@
 
 
         <x-containers.inner title="Elementy wyceny">
-          <div class="max-h-[600px] h-full overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col">
-
+          <div class="max-h-[600px] h-full overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col" id="dodane">
             
           </div>
         </x-containers.inner>
 
 
         <x-containers.inner title="Wycenione elementy">
-          <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col">
+          <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col" id="usuniete">
             @foreach ($priced_items as $item)
-              <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4">
+              <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4" id="item{{$item->id}}">
                 <div class="flex flex-col items-center justify-center add-to-quote">
-                  <span class="cursor-pointer btn-primary">+</span>
+                  <span class="cursor-pointer btn-primary" id="item{{$item->id}}_button" onclick="clone('item{{$item->id}}')">+</span>
                 </div>
                 <div class="pl-4 item">
-                  <div class="mb-2 font-semibold title"> {{ $item->title }}</div>
-                  <div class="text-sm content"> {{ $item->content }}</div>
+                  <div class="mb-2 font-semibold title" id="item{{$item->id}}_title">{{ $item->title }}</div>
+                  <div class="text-sm content" id="item{{$item->id}}_content"> {{ $item->content }}</div>
                 </div>
                 <div class="flex flex-col items-center justify-center border-l border-gray-300 job">
-                  <span class="font-semibold uppercase">{{ $item->jobType->abbreviation }}</span>
-                  <span>{{ $item->work_hours }}</span>
+                  <span class="font-semibold uppercase" id="item{{$item->id}}_job">{{ $item->jobType->abbreviation }}</span>
+                  <span id="item{{$item->id}}_hours">{{ $item->work_hours }}</span>
                 </div>
               </div>
             @endforeach
@@ -85,3 +84,61 @@
     </x-containers.outer>
   </form>
 </x-app-layout>
+
+
+<script type="text/javascript">
+window.licznik=0
+function clone(id){
+  /*alert(id)
+  var myDiv = id;
+  var divClone = myDiv.cloneNode(true);
+  divClone.id=divClone.id+"m";
+  myDiv.style.background="gray";
+  dodane.appendChild(divClone);
+  var idbutton=document.getElementById("item3button")
+  alert(idbutton)
+  document.getElementById(idbutton).addClass(disabled);*/
+  var div = document.getElementById(id);
+
+  var divTitle = document.getElementById(id+"_title");
+  var divCloneTitle = document.createElement("input");
+  divCloneTitle.setAttribute("id",id+"_title")
+  divCloneTitle.value = divTitle.innerHTML;
+
+  var divContent = document.getElementById(id+"_content");
+  var divCloneContent = document.createElement("textarea");
+  divCloneTitle.setAttribute("id",id+"_content")
+  divCloneContent.value = divContent.innerHTML
+
+  var divButton = document.getElementById(id+"_button");
+  divButton.style.background = "#FFBF00";
+  divButton.innerHTML = "-"
+  divButton.setAttribute('onclick','abc('+id+')')
+  alert(divButton.onclick)
+
+  divTitle.replaceWith(divCloneTitle);
+  divContent.replaceWith(divCloneContent);
+  dodane.appendChild(div);
+};
+function abc(id){
+  var div = document.getElementById(id);
+
+  var divTitle = document.getElementById(id+"_title");
+  var divCloneTitle = document.createElement("div");
+  alert(divTitle)
+  divCloneTitle.innerHTML = divTitle.value;
+
+  var divContent = document.getElementById(id+"_content");
+  var divCloneContent = document.createElement("div");
+  divCloneContent.innerHTML = divContent.value
+
+  var divButton = document.getElementById(id+"_button");
+  divButton.style.background = "#0000FF";
+  divButton.innerHTML = "+"
+  divButton.setAttribute('onclick','clone('+id+')')
+
+  divTitle.replaceWith(divCloneTitle);
+  divContent.replaceWith(divCloneContent);
+  usuniete.appendChild(div);
+}
+</script>

@@ -4,39 +4,48 @@ document.querySelectorAll('.add-to-quote').forEach(function (element){
         console.log(element.dataset.element_title);
         console.log(element.dataset.element_content);
     
-    //element.removeAttribute('.add-to-quote');
-    //element.setAttribute('.del-quote');
     var id = element.dataset.element_id;
     var title = element.dataset.element_title;
     var content = element.dataset.element_content;
 
     var div = document.getElementById("item"+id);
     var divClone = div.cloneNode(true);
-    var divTitle = document.getElementById("item"+id+"_title");
+    //var divTitle = document.getElementById("item"+id+"_title");
+    var divT = divClone.children[1].children[0]
+    
     var divCloneTitle = document.createElement("input");
-    divCloneTitle.setAttribute("id","item"+id+"_title")
+    divCloneTitle.setAttribute("id","item"+id+"_title");
+    divCloneTitle.setAttribute("class","mb-2 font-semibold")
     divCloneTitle.value = title
 
-    var divContent = document.getElementById("item"+id+"_content");
+    //var divContent = document.getElementById("item"+id+"_content");
+    var divC = divClone.children[1].children[1]
     var divCloneContent = document.createElement("textarea");
-    divCloneTitle.setAttribute("id","item"+id+"_content")
+    divCloneContent.setAttribute("id","item"+id+"_content")
+    divCloneContent.setAttribute("class","text-sm")
     divCloneContent.value = content
-  
+
     var divButton = document.getElementById("item"+id+"_button");
-    divButton.style.background = "#FFBF00";
-    divButton.style.borderColor = "#FFBF00";
-    divButton.style.hover = "#000000";
-    divButton.innerHTML = "-"
-    divButton.setAttribute('onclick','abc('+id+')')
+    var divB = divClone.children[0].children[0]
+    var divCloneButton = divButton.cloneNode(true);
+    divButton.setAttribute('class','cursor-pointer pointer-events-none btn-primary');
+    divButton.removeAttribute('onclick')
+    divCloneButton.setAttribute('class','cursor-pointer btn-secondary')
+    divCloneButton.innerHTML = "-"
+    //divButton.setAttribute('onclick','abc('+id+')')
     //divButton.classList.add('pointer-events-none')
     //alert(divButton.onclick)
       //alert(divTitle)
       //alert(divCloneTitle)
-    divTitle.replaceWith(divCloneTitle);
-    divContent.replaceWith(divCloneContent);
+
+    
+    div.style.background="gray"
+    divT.replaceWith(divCloneTitle);
+    divC.replaceWith(divCloneContent);
+    divB.replaceWith(divCloneButton);
     document.querySelectorAll('.here-add-quote').forEach(function (ele){
-      ele.appendChild(div);
+      ele.appendChild(divClone);
       })
-    })
+    },{once: true})
 })
 

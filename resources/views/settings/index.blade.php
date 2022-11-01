@@ -4,7 +4,7 @@
       {!! \Session::get('success') !!}
     </x-toast>
   @endif
-  <form id="settings_data" method="POST" action="/user/settings">
+  <form id="settings_data" method="POST" action="/user/settings" autocomplete="chrome-off">
     @csrf
     @method('PATCH')
     <x-containers.outer title="Ustawienia" buttonStyle="primary" buttonType="submit" buttonText="Zapisz zmiany">
@@ -21,7 +21,7 @@
             @foreach ($quote_states as $state)
               <div class="mb-2 state-wrapper gap-4 grid grid-cols-[auto_180px_50px]">
                 <x-inputs.text class="quote-state" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][state]" :value="$state->state" :errorKey="'states.' . $loop->iteration . '.state'" />
-                <x-inputs.text class="quote-color rounded-lg" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][color]" :value="$state->color" :errorKey="'states.' . $loop->iteration . '.color'" data-jscolor="{}"/>
+                <x-inputs.text class="rounded-lg quote-color" placeholder="Nazwa statusu" name="states[{{ $loop->iteration }}][color]" :value="$state->color" :errorKey="'states.' . $loop->iteration . '.color'" data-jscolor="{}" />
                 <x-inputs.hidden name="states[{{ $loop->iteration }}][id]" :value="$state->id" />
                 <x-buttons.delete class="h-full px-3 mx-auto text-sm reverse delete-quote-state" data-quotestate_id="{{ $state->id }}">
                   Usuń
@@ -72,6 +72,18 @@
           Dodaj nowy
           <x-icons.add />
         </x-buttons.primary>
+
+      </x-containers.inner>
+
+      <x-containers.inner title="Ustawienia konta">
+        <x-titles.text>Dane użytkownika</x-titles.text>
+
+        <x-inputs.text class="" placeholder="Nazwa konta" name="user_name" value="{{ Auth::user()->name }}" errorKey="user_name" autocomplete="off" />
+        <x-inputs.email class="" placeholder="Twój adres email" name="user_email" value="{{ Auth::user()->email }}" errorKey="user_email" autocomplete="off" />
+        <x-titles.text class="mt-8">Zmiana hasła</x-titles.text>
+        <x-inputs.password class="" name="current_password" value="" placeholder="Obecne hasło" errorKey="current_password" autocomplete="new-password" />
+        <x-inputs.password class="" name="user_password" value="" placeholder="Nowe hasło" errorKey="user_password" autocomplete="new-password" />
+        <x-inputs.password class="" name="user_password_confirm" value="" placeholder="Powtórz nowe hasło" errorKey="user_password_confirm" autocomplete="new-password" />
 
       </x-containers.inner>
     </x-containers.outer>

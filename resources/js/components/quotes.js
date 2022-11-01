@@ -3,6 +3,7 @@ document.querySelectorAll('.add-to-quote').forEach(function (element) {
 
 
   function quote() {
+
     //skrocenie zmiennych
     var id = element.dataset.element_id;
     var title = element.dataset.element_title;

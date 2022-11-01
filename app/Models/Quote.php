@@ -37,4 +37,19 @@ class Quote extends Model
     {
         return $this->belongsToMany(PricedItem::class);
     }
+
+    public function scopeSearch($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+
+            $query->orderBy('updated_at')->whereHas('client', function ($query) use ($filters) {
+                $query->where('first_name', 'like', '%' . request('search') . '%')
+                    ->orWhere('last_name', 'like', '%' . request('search') . '%')
+                    ->orWhere('email', 'like', '%' . request('search') . '%')
+                    ->orWhere('name', 'like', '%' . request('search') . '%')
+                    ->orWhere('company', 'like', '%' . request('search') . '%')
+                    ->orWhere('city', 'like', '%' . request('search') . '%');
+            })->orWhere('name', 'like', '%' . request('search') . '%');
+        }
+    }
 }

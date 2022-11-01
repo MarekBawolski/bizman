@@ -4,7 +4,7 @@
       {!! \Session::get('success') !!}
     </x-toast>
   @endif
-  <form id="settings_data" method="POST" action="/user/settings" autocomplete="chrome-off">
+  <form id="settings_data" method="POST" action="/user/settings">
     @csrf
     @method('PATCH')
     <x-containers.outer title="Ustawienia" buttonStyle="primary" buttonType="submit" buttonText="Zapisz zmiany">
@@ -73,20 +73,19 @@
           <x-icons.add />
         </x-buttons.primary>
 
-        </x-containers.inner>
       </x-containers.collapse>
-      <x-containers.collapse title="Rodzaje wykonywanych prac">
-        <x-containers.inner title="Ustawienia konta">
-          <x-titles.text>Dane użytkownika</x-titles.text>
-
+      <x-containers.collapse title="Ustawienia konta">
+        <x-titles.text>Dane użytkownika</x-titles.text>
+        <div class="flex flex-col gap-2">
           <x-inputs.text class="" placeholder="Nazwa konta" name="user_name" value="{{ Auth::user()->name }}" errorKey="user_name" autocomplete="off" />
           <x-inputs.email class="" placeholder="Twój adres email" name="user_email" value="{{ Auth::user()->email }}" errorKey="user_email" autocomplete="off" />
-          <x-titles.text class="mt-8">Zmiana hasła</x-titles.text>
+        </div>
+        <x-titles.text class="mt-8">Zmiana hasła</x-titles.text>
+        <div class="flex flex-col gap-2">
           <x-inputs.password class="" name="current_password" value="" placeholder="Obecne hasło" errorKey="current_password" autocomplete="new-password" />
           <x-inputs.password class="" name="user_password" value="" placeholder="Nowe hasło" errorKey="user_password" autocomplete="new-password" />
           <x-inputs.password class="" name="user_password_confirm" value="" placeholder="Powtórz nowe hasło" errorKey="user_password_confirm" autocomplete="new-password" />
-
-        </x-containers.inner>
+        </div>
       </x-containers.collapse>
     </x-containers.outer>
   </form>

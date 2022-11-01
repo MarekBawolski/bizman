@@ -10,6 +10,9 @@
     <div class="grid grid-cols-2 gap-16">
       <x-containers.inner title="Elementy wyceny">
         <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col">
+
+          <x-inputs.add-item></x-inputs.add-item>
+
           @isset($selected)
             @foreach ($selected as $item)
               <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4">

@@ -5,7 +5,6 @@
       {!! \Session::get('success') !!}
     </x-toast>
   @endif
-  <script type="text/javascript" src="../js/components/search.js"></script>
   <form method="POST" action="/quotes">
     @csrf
     <x-containers.outer title="Nowa wycena" buttonStyle="primary" buttonType="submit" buttonText="Dodaj">
@@ -62,7 +61,7 @@
 
 
         <x-containers.inner title="Wycenione elementy">
-          <input type="text" id="search" onkeyup="searchFunction()" placeholder="znajdź...">
+          <input type="text" class="absolute w-1/2 rounded-lg right-0 top-4 new-quote-search" id="search" placeholder="szukaj...">
           <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes" id="table">
             
             @foreach ($priced_items as $item)
@@ -85,27 +84,4 @@
       </div>
     </x-containers.outer>
   </form>
-</x-app-layout><script>
-function searchFunction() {
-  // Declare variables
-  var input, filter, table, item, itemText, i, txtValue;
-  input = document.getElementById("search");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("table");
-  item = table.getElementsByClassName("item");
-  
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < item.length; i++) {
-    itemText = item[i].getElementsByTagName("div")[1].getElementsByTagName("div")[0];
-    if (itemText) {
-      txtValue = itemText.textContent || itemText.innerText;
-
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        item[i].style.display = "";
-      } else {
-        item[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
+</x-app-layout>

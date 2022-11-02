@@ -21,12 +21,7 @@
     </div>
 
     <div class="basis-0 grow-[1] flex flex-col justify-around">
-      <select class="rounded-lg w-full p-3 border-none">
-        <option disabled selected hidden>Rodzaj prac</option>
-        <option>option 1</option>
-        <option>option 2</option>
-        <option>option 3</option>
-      </select>
+      {{ $slot }} 
       <x-inputs.text name="work_hours" :value="old('work_hours')" placeholder="Czas">
         @error('work_hours')
           <span class="text-xs text-red-700">{{ $message }}</span>

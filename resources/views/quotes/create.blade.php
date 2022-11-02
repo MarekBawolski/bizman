@@ -57,7 +57,19 @@
         <x-containers.inner title="Elementy wyceny">
           <div class="max-h-[600px] h-full overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-add-quote">
 
-            <x-inputs.add-item></x-inputs.add-item>
+            <x-add-item>
+              <select name="job_type_id" class="rounded-lg w-full p-3 border-none">
+                <option disabled selected hidden>Rodzaj prac</option>
+                @foreach($job_types as $type)
+                <option value="{{ $type->id }}">
+                  {{ $type->abbreviation }}
+                </option>
+                @endforeach
+              </select>
+              @error('job_type_id')
+                <span class="text-xs text-red-700">{{ $message }}</span>
+              @enderror
+            </x-add-item>
 
           </div>
         </x-containers.inner>

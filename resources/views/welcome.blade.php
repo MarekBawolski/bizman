@@ -437,7 +437,7 @@
             <a href="{{ url('/clients') }}" class="m-3">
               <x-buttons.primary>
                 Dashboard
-               </x-buttons.primary>
+              </x-buttons.primary>
             </a>
           @else
             <a href="{{ route('login') }}" class="m-3">

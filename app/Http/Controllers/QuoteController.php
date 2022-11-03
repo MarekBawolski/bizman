@@ -19,7 +19,11 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        $quotes =  Quote::latest('updated_at')->where('user_id', Auth::user()->id)->paginate(15);
+        $quotes =  Quote::latest('updated_at')
+            ->search(request(['search']))
+            ->where('user_id', Auth::user()->id)
+            ->paginate(15);
+
         return view('quotes.index', compact('quotes'));
     }
 
@@ -33,11 +37,13 @@ class QuoteController extends Controller
         $user_clients = Client::all()->where('user_id', Auth::user()->id);
         $quote_states = QuoteState::all()->where('user_id', Auth::user()->id);
         $priced_items = PricedItem::all()->where('user_id', Auth::user()->id);
+        $job_types = JobType::all()->where('user_id', Auth::user()->id);
 
         return view('quotes.create', [
             'clients' => $user_clients,
             'states' => $quote_states,
-            'priced_items' => $priced_items
+            'priced_items' => $priced_items,
+            'job_types' => $job_types
         ]);
     }
 
@@ -93,10 +99,12 @@ class QuoteController extends Controller
     public function edit(Quote $quote)
     {
         $results = PricedItem::where('user_id', Auth::user()->id)->paginate(10);
+        $job_types = JobType::all()->where('user_id', Auth::user()->id);
         return view('quotes.edit', [
             'quote' => $quote,
             'selected' => $quote->pricedItems,
-            'items' => $results
+            'items' => $results,
+            'job_types' => $job_types
         ]);
     }
 

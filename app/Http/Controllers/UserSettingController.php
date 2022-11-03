@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\JobType;
 use App\Models\QuoteState;
+use App\Models\User;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserSettingController extends Controller
@@ -86,13 +88,23 @@ class UserSettingController extends Controller
             'jobtypes.*.id' => 'nullable',
             'states.*.id' => 'nullable',
             'delete.states.*' => 'required',
-            'delete.jobtypes.*' => 'required'
+            'delete.jobtypes.*' => 'required',
+            'current_password' => 'nullable|required_with:user_password',
+            'user_email' => 'nullable|email',
+            'user_password' => 'nullable|min:6|required_with:user_password_confirm',
+            'user_password_confirm' => 'nullable|same:user_password|min:6'
         ];
         $messages = [
             'states.*.state.required' => 'Pole jest wymagane',
             'states.*.color.regex' => 'Wymagany format HEX',
             'jobtypes.*.type.required' => 'Pole jest wymagane',
             'jobtypes.*.abbreviation.required' => 'Pole jest wymagane',
+            'user_email.email' => 'Niepoprawny adres email',
+            'user_password.min' => 'Minimalna długość hasła to 6 znaków',
+            'user_password_confirm.min' => 'Minimalna długość hasła to 6 znaków',
+            'user_password.required_with' => 'Mddhh',
+            'user_password.confirmed' => 'Wpisz hasło dwukrotnie',
+            'user_password_confirm.same' => 'Hasła musza być takie same'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -137,7 +149,27 @@ class UserSettingController extends Controller
                 }
             }
         }
+        if (array_key_exists('user_email', $validated)) {
 
+            $user = Auth::user();
+            if ($validated['user_email'] != $user->email) {
+                $user->email = $validated['user_email'];
+                $user->save();
+            }
+        }
+        if (array_key_exists('user_password', $validated) && array_key_exists('user_password_confirm', $validated)) {
+
+            $user = Auth::user();
+
+            if (!Hash::check($validated['current_password'], $user->password)) {
+                return redirect('user/settings')
+                    ->withErrors(['current_password' => 'Obecne hasło nie jest poprawne'])
+                    ->withInput();
+            } else {
+                $user->password = Hash::make($request->user_password);
+                $user->save();
+            }
+        }
         return redirect('/user/settings/')->with('success', 'Ustawienia zaktualizowane');
     }
 

@@ -39,7 +39,7 @@
       </x-containers.inner>
       <x-containers.inner title="Wycenione elementy">
         <input type="text" class="absolute w-1/2 rounded-lg right-0 top-4 new-quote-search" id="search" placeholder="szukaj...">
-        <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes">
+        <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes" id="table">
           @isset($items)
             @foreach ($items as $item)
               <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4 item" id="item{{$item->id}}">

@@ -1,6 +1,5 @@
 document.querySelectorAll('.add-to-quote').forEach(function (element) {
-  element.addEventListener('click', function () { quote(); }, { once: true });
-
+  element.addEventListener('click',quote , { once: true });
 
   function quote() {
 
@@ -45,7 +44,7 @@ document.querySelectorAll('.add-to-quote').forEach(function (element) {
       document.getElementById("item" + id + "_button").addEventListener('click', function () { quote(); }, { once: true });
     })
 
-    //dodanie przerobionego diva na prawo
+    //dodanie przerobionego diva na lewo
     div.style.background = "gray"
     divTitle.replaceWith(divCloneTitle);
     divContent.replaceWith(divCloneContent);
@@ -57,3 +56,28 @@ document.querySelectorAll('.add-to-quote').forEach(function (element) {
 }
 )
 
+document.querySelectorAll('.delete-quote').forEach(function (element) {
+
+    //skrocenie zmiennych
+    var id = element.dataset.element_id;
+
+    //glowny div
+    var div = document.getElementById("item" + id);
+
+    //button
+    var divOrgButton = document.getElementById("item" + id + "_button");
+    divOrgButton.setAttribute('class', 'cursor-pointer pointer-events-none btn-primary');
+    var divButton = document.getElementById("item" + id + "_buttonm");
+
+    //usuwanie diva z lewej strony
+    divButton.addEventListener('click', function (e) {
+      document.getElementById("item" + id + "m").remove()
+      document.getElementById("item" + id).style.background = "rgb(243 244 246)"
+      document.getElementById("item" + id + "_button").setAttribute('class', 'cursor-pointer btn-primary');
+      document.getElementById("item" + id + "_button").addEventListener('click', function () { quote(); }, { once: true });
+    })
+
+    //dodanie przerobionego diva na lewo
+    div.style.background = "gray"
+  }
+)

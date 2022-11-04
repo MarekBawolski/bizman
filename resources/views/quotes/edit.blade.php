@@ -28,7 +28,7 @@
           @isset($selected)
             @foreach ($selected as $item)
               <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4" id="item{{$item->id}}m">
-                <div class="flex flex-col items-center justify-center add-to-quote" data-element_id="{{$item->id}}" data-element_title="{{$item->title}}" data-element_content="{{$item->content}}">
+                <div class="flex flex-col items-center justify-center delete-quote" data-element_id="{{$item->id}}" data-element_title="{{$item->title}}" data-element_content="{{$item->content}}">
                   <span class="cursor-pointer btn-secondary" id="item{{$item->id}}_buttonm">-</span>
                 </div>
                 <div class="flex flex-col gap-2 pl-4 item">
@@ -54,7 +54,7 @@
       </x-containers.inner>
       <x-containers.inner title="Wycenione elementy">
         <input type="text" class="absolute w-1/2 rounded-lg right-0 top-4 new-quote-search" id="search" placeholder="szukaj...">
-        <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes" id="table">
+        <div class="h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes" id="table">
           @isset($items)
             @foreach ($items as $item)
               <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4 item" id="item{{$item->id}}">

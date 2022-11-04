@@ -98,7 +98,7 @@ class QuoteController extends Controller
      */
     public function edit(Quote $quote)
     {
-        $results = PricedItem::where('user_id', Auth::user()->id)->paginate(10);
+        $results = PricedItem::where('user_id', Auth::user()->id)->get()->all();
         $job_types = JobType::all()->where('user_id', Auth::user()->id);
         return view('quotes.edit', [
             'quote' => $quote,

@@ -53,7 +53,12 @@
               <x-inputs.text placeholder="Suma" name="" />
             @endforeach
           @endif
+
+
+
+
         </div>
+        <x-buttons.primary><a href="{{ url('/quotes/' . $quote->id . '/pdf') }}" class="">PDF</a></x-buttons.primary>
       </x-containers.inner>
     </div>
 

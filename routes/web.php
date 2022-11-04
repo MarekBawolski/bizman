@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExperimentController;
 use App\Http\Controllers\PricedItemController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\QuoteDocumentController;
 use App\Http\Controllers\UserSettingController;
 use App\Models\Client;
 use App\Models\Quote;
@@ -57,6 +58,7 @@ Route::get('/quotes', [QuoteController::class, 'index'])->middleware(['auth'])->
 Route::post('/quotes', [QuoteController::class, 'store'])->middleware(['auth']);
 Route::get('/quotes/create', [QuoteController::class, 'create'])->middleware(['auth']);
 Route::get('/quotes/{quote}', [QuoteController::class, 'show'])->middleware(['can:view-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
+Route::get('/quotes/{quote}/pdf', [QuoteDocumentController::class, 'generatePdf'])->middleware(['can:view-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
 Route::patch('/quotes/{quote}', [QuoteController::class, 'update'])->middleware(['can:edit-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
 Route::get('/quotes/{quote}/edit', [QuoteController::class, 'edit'])->middleware(['can:edit-quote,quote'])->name('quotes')->where('quote', '[0-9]+');
 Route::delete('/quotes/{quote}', [QuoteController::class, 'destroy'])->middleware(['can:edit-quote,quote'])->name('quotes')->where('quote', '[0-9]+');

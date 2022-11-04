@@ -10,6 +10,21 @@
     <div class="grid grid-cols-2 gap-16">
       <x-containers.inner title="Elementy wyceny">
         <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col">
+
+          <x-add-item>
+            <select name="job_type_id" class="rounded-lg w-full p-3 border-none">
+              <option disabled selected hidden>Rodzaj prac</option>
+              @foreach($job_types as $type)
+              <option value="{{ $type->id }}">
+                {{ $type->abbreviation }}
+              </option>
+              @endforeach
+            </select>
+            @error('job_type_id')
+              <span class="text-xs text-red-700">{{ $message }}</span>
+            @enderror
+          </x-add-item>
+
           @isset($selected)
             @foreach ($selected as $item)
               <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4">

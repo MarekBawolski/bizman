@@ -59,11 +59,13 @@ class QuoteController extends Controller
             'client_id' => 'required',
             'state_id' => 'required',
             'name' => 'required',
-            'quote_elements' => 'required',
+            'quote_elements.*.title' => 'required|string',
+            'quote_elements.*.content' => 'required|string',
+            'quote_elements.*.job_type' => 'required',
+            'quote_elements.*.time' => 'required',
             'calculate' => 'nullable|string',
             'notes' => 'nullable|string',
         ]);
-
         $attributes['user_id'] = auth()->id();
         $attributes['quote_elements'] = json_encode(array_map('intval', $attributes['quote_elements']));
 

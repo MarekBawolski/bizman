@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Quote;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
@@ -10,14 +11,21 @@ class QuoteDocumentController extends Controller
 {
     public function generatePdf(Quote $quote)
     {
-        $dompdf = new Dompdf();
+        $client = Client::where('id', '=', $quote->client_id)->get()->first();
 
-        $options = $dompdf->getOptions();
-        $options->setDefaultFont('Courier');
-        $dompdf->setOptions($options);
+        $tmp = sys_get_temp_dir();
+        $dompdf = new Dompdf([
+            'logOutputFile' => '',
+            'isRemoteEnabled' => true,
+            'fontDir' => $tmp,
+            'fontCache' => $tmp,
+            'tempDir' => $tmp,
+            'chroot' => $tmp,
+        ]);
 
         $dompdf->loadHtml(view('quotes.pdf', [
-            'quote' => $quote
+            'quote' => $quote,
+            'client' => $client
         ]));
 
         $dompdf->setPaper('A4', 'horizontal');

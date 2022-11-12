@@ -5,9 +5,7 @@
       {!! \Session::get('success') !!}
     </x-toast>
   @endif
-
-  @dump($errors)
-
+  
   <form method="POST" action="/quotes">
     @csrf
     <x-containers.outer title="Nowa wycena" buttonStyle="primary" buttonType="submit" buttonText="Dodaj">
@@ -77,9 +75,11 @@
 
 
         <x-containers.inner title="Wycenione elementy">
-          <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes">
+          <input type="text" class="absolute w-1/2 rounded-lg right-0 top-4 new-quote-search" id="search" placeholder="szukaj...">
+          <div class="max-h-[600px] overflow-auto bg-white rounded-lg px-6 py-6  gap-4 flex flex-col here-deleted-quotes" id="table">
+            
             @foreach ($priced_items as $item)
-              <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4" id="item{{ $item->id }}">
+              <div class="priced-item-wrapper grid grid-cols-[50px_auto_100px] bg-gray-100  rounded-lg gap-4 py-4 item" id="item{{ $item->id }}">
                 <div class="flex flex-col items-center justify-center add-to-quote" data-element_id="{{ $item->id }}" data-element_title="{{ $item->title }}" data-element_content="{{ $item->content }}">
                   <span class="cursor-pointer btn-primary" id="item{{ $item->id }}_button">+</span>
                 </div>
@@ -99,61 +99,3 @@
     </x-containers.outer>
   </form>
 </x-app-layout>
-
-
-<!--
-<script type="text/javascript">
-  function clone(id) {
-    /*alert(id)
-    var myDiv = id;
-    var divClone = myDiv.cloneNode(true);
-    divClone.id=divClone.id+"m";
-    myDiv.style.background="gray";
-    dodane.appendChild(divClone);
-    var idbutton=document.getElementById("item3button")
-    alert(idbutton)
-    document.getElementById(idbutton).addClass(disabled);*/
-    /*var div = document.getElementById(id);
-
-  var divTitle = document.getElementById(id+"_title");
-  var divCloneTitle = document.createElement("input");
-  divCloneTitle.setAttribute("id",id+"_title")
-  divCloneTitle.value = divTitle.innerHTML;
-
-  var divContent = document.getElementById(id+"_content");
-  var divCloneContent = document.createElement("textarea");
-  divCloneTitle.setAttribute("id",id+"_content")
-  divCloneContent.value = divContent.innerHTML
-
-  var divButton = document.getElementById(id+"_button");
-  divButton.style.background = "#FFBF00";
-  divButton.innerHTML = "-"
-  divButton.setAttribute('onclick','abc('+id+')')
-  alert(divButton.onclick)
-
-  divTitle.replaceWith(divCloneTitle);
-  divContent.replaceWith(divCloneContent);
-  dodane.appendChild(div);
-};
-function abc(id){
-  var div = document.getElementById(id);
-
-  var divTitle = document.getElementById(id+"_title");
-  var divCloneTitle = document.createElement("div");
-  alert(divTitle)
-  divCloneTitle.innerHTML = divTitle.value;
-
-  var divContent = document.getElementById(id+"_content");
-  var divCloneContent = document.createElement("div");
-  divCloneContent.innerHTML = divContent.value
-
-  var divButton = document.getElementById(id+"_button");
-  divButton.style.background = "#0000FF";
-  divButton.innerHTML = "+"
-  divButton.setAttribute('onclick','clone('+id+')')
-
-  divTitle.replaceWith(divCloneTitle);
-  divContent.replaceWith(divCloneContent);
-  usuniete.appendChild(div);
-}*/
-</script>-->
